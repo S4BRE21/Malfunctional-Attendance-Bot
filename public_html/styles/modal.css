@@ -1,6 +1,6 @@
-/* MODAL SYSTEM - Core modal backgrounds, containers, and base functionality */
+/* MODAL SYSTEM - Core modal backgrounds, containers, and base functionality - ADMIN DASHBOARD THEME */
 
-/* Modal Background */
+/* Modal Background - UPDATED THEME */
 .modal-bg {
   display: none !important;
   position: fixed;
@@ -9,16 +9,21 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   z-index: 9999;
   justify-content: center;
   align-items: center;
   will-change: opacity, transform;
 }
+
 .modal-bg.show {
   display: flex !important;
 }
-#calloutModal { z-index: 99999 !important; }
+
+#calloutModal { 
+  z-index: 99999 !important; 
+}
+
 #adminModal {
   z-index: 9999 !important;
   width: 100vw !important;
@@ -32,6 +37,7 @@
   justify-content: center;
   padding: 0 !important;
 }
+
 #adminModal > .modal-body,
 #adminModal .modal-body {
   width: 100%;
@@ -42,10 +48,11 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(145deg, #232640, #1a1a2e);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(20px);
   border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   padding: 2rem;
   position: relative;
   z-index: 10000;
@@ -60,17 +67,22 @@
   height: 100%;
   overflow: auto;
 }
+
 .tab-panel.active {
   display: block;
 }
 
-/* --- Admin Modal Table Fixes --- */
+/* --- Admin Modal Table Fixes - UPDATED THEME --- */
 #adminModal table,
 #adminModal .admin-user-table,
 #adminModal .admin-callout-table {
   width: 100% !important;
   table-layout: fixed;
   border-collapse: separate;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 #adminModal th,
@@ -82,14 +94,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   background: transparent;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--slate-50);
 }
 
 #adminModal thead th {
   position: sticky;
   top: 0;
   z-index: 2;
-  background: #212239;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 #adminModal tbody {
@@ -102,11 +117,13 @@
 #adminModal .admin-callout-table {
   margin: 0;
   border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
-/* Main Modal Container - Default (for others) */
+/* Main Modal Container - Default (for others) - UPDATED THEME */
 .modal {
-  background: linear-gradient(145deg, #232640, #1a1a2e);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
   width: 60vw;
@@ -116,8 +133,8 @@
   min-width: 600px;
   min-height: 400px;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   position: relative;
   z-index: 10000;
   transform: translateZ(0);
@@ -125,8 +142,337 @@
   display: flex;
   flex-direction: column;
 }
-/* Modal header, close, etc. unchanged (see your last modal.css for details) */
-/* ...snip (see your modal.css for more detail—unchanged sections) ... */
+
+/* Modal Header - UPDATED THEME */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  backdrop-filter: blur(10px);
+  margin: -2rem -2rem 0 -2rem;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--slate-50);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-close {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  color: var(--danger-red);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.modal-close:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(239, 68, 68, 0.2));
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Modal Body - UPDATED THEME */
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  min-height: 0;
+  color: var(--slate-50);
+}
+
+/* Custom scrollbar for modal bodies - UPDATED THEME */
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
+}
+
+/* Table Styling in Modals - UPDATED THEME */
+.callout-table,
+.callouts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.callout-table th,
+.callout-table td,
+.callouts-table th,
+.callouts-table td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--slate-50);
+}
+
+.callout-table th,
+.callouts-table th {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  backdrop-filter: blur(15px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.callout-table td,
+.callouts-table td {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
+}
+
+.callout-table tr:hover,
+.callouts-table tr:hover {
+  background-color: rgba(59, 130, 246, 0.05) !important;
+}
+
+/* Summary Statistics - UPDATED THEME */
+.summary-stats,
+.summary-counts {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  min-width: 100px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number,
+.summary-counts strong {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: var(--slate-50);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  color: var(--slate-400);
+}
+
+.summary-counts span {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--slate-50);
+}
+
+/* Status Badges - UPDATED THEME */
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-align: center;
+  min-width: 60px;
+  border: 2px solid;
+  backdrop-filter: blur(10px);
+}
+
+.status-badge.late {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warning-orange);
+  border-color: var(--warning-orange);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.status-badge.out {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger-red);
+  border-color: var(--danger-red);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.status-badge.unknown {
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--slate-400);
+  border-color: var(--slate-400);
+}
+
+/* Action Buttons - UPDATED THEME */
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: normal;
+  margin: 0 2px;
+  backdrop-filter: blur(10px);
+}
+
+.edit-btn {
+  background: linear-gradient(135deg, var(--warning-orange), var(--warning-orange-dark));
+  color: #000;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #fbbf24, var(--warning-orange));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, var(--danger-red), var(--danger-red-dark));
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #f87171, var(--danger-red));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* Enhanced Buttons - UPDATED THEME */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #34d399, var(--success-green));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--slate-600), var(--slate-700));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(71, 85, 105, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, var(--slate-500), var(--slate-600));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(71, 85, 105, 0.4);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger-red), var(--danger-red-dark));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #f87171, var(--danger-red));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
 
 /* Responsive: keep the modal always full screen for #adminModal */
 @media (max-width: 1200px) {
@@ -139,7 +485,17 @@
     min-height: 0 !important;
     padding: 0 !important;
   }
+
+  .modal {
+    width: 70vw;
+    height: 70vh;
+    max-width: 70vw;
+    max-height: 70vh;
+    min-width: 500px;
+    backdrop-filter: blur(15px);
+  }
 }
+
 @media (max-width: 768px) {
   #adminModal, #adminModal > .modal-body, #adminModal .modal-body {
     width: 100vw !important;
@@ -150,7 +506,34 @@
     min-height: 0 !important;
     padding: 0 !important;
   }
+
+  .modal {
+    width: 85vw;
+    height: 80vh;
+    max-width: 85vw;
+    max-height: 80vh;
+    min-width: 300px;
+    min-height: 350px;
+    padding: 1.5rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .modal-header {
+    padding: 1rem;
+    margin: -1.5rem -1.5rem 0 -1.5rem;
+  }
+
+  .callout-table,
+  .callouts-table {
+    font-size: 0.8rem;
+  }
+
+  .summary-stats,
+  .summary-counts {
+    gap: 1rem;
+  }
 }
+
 @media (max-width: 480px) {
   #adminModal, #adminModal > .modal-body, #adminModal .modal-body {
     width: 100vw !important;
@@ -161,13 +544,45 @@
     min-height: 0 !important;
     padding: 0 !important;
   }
+
+  .modal {
+    width: 95vw;
+    height: 85vh;
+    max-width: 95vw;
+    max-height: 85vh;
+    min-width: unset;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-header {
+    padding: 0.75rem;
+    margin: -1rem -1rem 0 -1rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
+  .callout-table,
+  .callouts-table {
+    font-size: 0.75rem;
+  }
+
+  .summary-stats,
+  .summary-counts {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
+
 /* Nuclear option: callout modal always visible if open */
 #calloutModal.modal_bg,
 #calloutModal.modal-bg,
 #calloutModal {
   z-index: 99999 !important;
 }
+
 #calloutModal[style*="display: flex"] {
   z-index: 99999 !important;
   position: fixed !important;
@@ -176,6 +591,7 @@
   width: 100vw !important;
   height: 100vh !important;
 }
+
 #adminModal.modal-bg[style*="display: none"] {
   display: none !important;
   z-index: -1 !important;

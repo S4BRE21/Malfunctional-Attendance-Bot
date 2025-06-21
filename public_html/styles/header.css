@@ -1,4 +1,4 @@
-/* FIXED: Header Styles - 3-column layout with centered logo and horizontal user info */
+/* Header Styles - 3-column layout with centered logo and horizontal user info - ADMIN DASHBOARD THEME */
 
 .main-header {
   display: grid;
@@ -11,11 +11,17 @@
   height: 4rem;
   align-items: center; /* Center everything vertically */
   padding: 0;
+  /* UPDATED: Dashboard-style background */
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   /* FIXED: RAISE entire header up */
   transform: translateY(-20px);
 }
 
-/* User/Login goes in column 1 - HORIZONTAL LAYOUT */
+/* User/Login goes in column 1 - HORIZONTAL LAYOUT - UPDATED THEME */
 .user-container,
 .login-container {
   grid-column: 1;
@@ -24,28 +30,30 @@
   justify-content: flex-start; /* Align to left side */
   gap: 0.75rem; /* Space between avatar, name, logout */
   height: 100%;
-  background: none;
-  border: none;
-  padding: 0.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+
+  padding: 0.5rem 1rem;
   /* FIXED: LOWERED user/login section - brought down a little */
   transform: translateY(-5px);
 }
 
-/* Logo goes in column 2 - PERFECTLY CENTERED */
+/* Logo goes in column 2 - PERFECTLY CENTERED - UPDATED THEME */
 .logo-container {
   grid-column: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: none;
-  border: none;
-  padding: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(15px);
+  border-radius: 0px;
+  padding: 0.5rem;
   /* FIXED: RAISE logo */
   transform: translateY(-25px);
 }
 
-/* Admin/Dropdowns go in column 3 - RIGHT SIDE */
+/* Admin/Dropdowns go in column 3 - RIGHT SIDE - UPDATED THEME */
 .admin-controls {
   grid-column: 3;
   display: flex;
@@ -56,7 +64,7 @@
   padding: 0.5rem;
 }
 
-/* Login Section - HORIZONTAL */
+/* Login Section - HORIZONTAL - UPDATED THEME */
 .login-section {
   display: flex;
   align-items: center;
@@ -67,20 +75,30 @@
 }
 
 .login-btn {
-  background: none;
-  color: #ffffff;
-  border: none;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+  color: var(--slate-50);
+  border: 2px solid rgba(59, 130, 246, 0.3);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-size: 1.4rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: all 0.3s ease;
   text-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.2));
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+  color: var(--slate-50);
 }
 
 .discord-icon {
@@ -90,7 +108,11 @@
   filter: brightness(0) invert(1);
 }
 
-/* Logo Section */
+.login-btn:hover .discord-icon {
+  transform: scale(1.1);
+}
+
+/* Logo Section - UPDATED THEME */
 .logo-section {
   display: flex;
   align-items: center;
@@ -107,13 +129,14 @@
   display: block !important;
   object-fit: contain !important;
   transition: transform 0.2s ease;
+/*  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));*/
 }
 
 .site-logo:hover {
   transform: scale(1.05);
 }
 
-/* User Section - HORIZONTAL LAYOUT */
+/* User Section - HORIZONTAL LAYOUT - UPDATED THEME */
 .user-info {
   display: flex;
   align-items: center; /* Horizontal alignment */
@@ -128,14 +151,23 @@
   width: 40px; /* Slightly smaller for horizontal layout */
   height: 40px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
   flex-shrink: 0; /* Don't shrink the avatar */
+  background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .user-avatar:hover {
   transform: scale(1.05);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 .user-details {
@@ -146,7 +178,7 @@
 }
 
 .user-name {
-  color: #ffffff;
+  color: var(--slate-50);
   font-weight: 600;
   font-size: 1.1rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -156,26 +188,29 @@
 }
 
 .logout-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+  border: 2px solid rgba(239, 68, 68, 0.3);
   border-radius: 6px;
   cursor: pointer;
   padding: 0.4rem 0.6rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   flex-shrink: 0; /* Don't shrink the logout button */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
 }
 
 .logout-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(239, 68, 68, 0.2));
+  border-color: rgba(239, 68, 68, 0.5);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .logout-btn-text {
-  color: #ffffff;
+  color: var(--slate-50);
   font-size: 0.85rem;
   font-weight: 500;
   display: none; /* Hidden by default, can be shown on larger screens */
@@ -188,14 +223,19 @@
   filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
 }
 
-/* Admin Controls Container */
+.logout-btn:hover .discord-logout-icon {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Admin Controls Container - UPDATED THEME */
 .admin-controls {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Dropdown Container (moved to right side) */
+/* Dropdown Container (moved to right side) - UPDATED THEME */
 .cdropdown-header {
   position: static; /* No longer absolutely positioned */
   display: flex;
@@ -205,50 +245,38 @@
   margin: 0;
 }
 
-/* Admin Button */
+/* Admin Button - UPDATED DASHBOARD THEME */
 .admin-btn {
-  background: #4a3f78;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
   color: white;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .admin-btn:hover {
-  background: #665aa3;
+  background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  border-color: rgba(59, 130, 246, 0.5);
 }
 
-/* Hover Effects */
-.login-btn:hover {
-  transform: translateY(-2px);
-  color: #e0e0e0;
-}
-
-.login-btn:hover .discord-icon {
-  transform: scale(1.1);
-}
-
-.logout-btn:hover .discord-logout-icon {
-  transform: scale(1.1);
-  filter: brightness(1.2);
-}
-
-/* Focus states */
+/* Focus states - UPDATED THEME */
 .login-btn:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.3);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
 .logout-btn:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.3);
-  border-radius: 4px;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
 }
 
 /* FIXED: Responsive design with proper sizing for full screen on all devices */
@@ -258,16 +286,20 @@
     margin-bottom: 8px;
     gap: 10px;
     transform: translateY(-15px);
+    backdrop-filter: blur(15px);
   }
   
   .user-container,
   .login-container {
     gap: 0.5rem; /* Smaller gap on mobile */
     transform: translateY(0px);
+    padding: 0.4rem 0.8rem;
+    backdrop-filter: blur(8px);
   }
   
   .logo-container {
     transform: translateY(-15px);
+    backdrop-filter: blur(12px);
   }
   
   .user-name {
@@ -320,16 +352,20 @@
     margin-bottom: 5px;
     gap: 8px;
     transform: translateY(-10px);
+    backdrop-filter: blur(12px);
   }
   
   .user-container,
   .login-container {
     gap: 0.4rem; /* Even smaller gap on mobile */
     transform: translateY(5px);
+    padding: 0.3rem 0.6rem;
+    backdrop-filter: blur(6px);
   }
   
   .logo-container {
     transform: translateY(-10px);
+    backdrop-filter: blur(10px);
   }
   
   .user-avatar {

@@ -1,4 +1,4 @@
-/* PERFORMANCE-OPTIMIZED Base Styles and Reset */
+/* PERFORMANCE-OPTIMIZED Base Styles and Reset - ADMIN DASHBOARD THEME */
 
 /* Screen reader only class for accessibility */
 .sr-only {
@@ -11,6 +11,29 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* CSS Variables for consistent theming */
+:root {
+  --primary-blue: #3b82f6;
+  --primary-blue-light: #60a5fa;
+  --primary-blue-dark: #1d4ed8;
+  --success-green: #10b981;
+  --success-green-dark: #059669;
+  --warning-orange: #f59e0b;
+  --warning-orange-dark: #d97706;
+  --danger-red: #ef4444;
+  --danger-red-dark: #dc2626;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
 }
 
 /* FIXED: Full viewport layout - NO SCROLLBARS - PERFORMANCE OPTIMIZED */
@@ -32,21 +55,20 @@ body {
   padding-top: 0.25rem; /* FIXED: Less top padding since header is raised */
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
-  color: #e0e0e0;
-  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 50%, var(--slate-900) 100%);
+  color: var(--slate-50);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', Arial, sans-serif;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   overflow: hidden;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #232640, #1a1a2e);
   border-radius: 20px;
-  /* SIMPLIFIED SHADOW - Better performance */
+  /* UPDATED: Dashboard-style shadows */
   box-shadow: 
-    0 0 30px 0 rgba(0, 0, 0, 0.4),
-    inset 0 0 15px 0 rgba(255, 255, 255, 0.02);
+    0 0 40px 0 rgba(0, 0, 0, 0.6),
+    inset 0 0 20px 0 rgba(255, 255, 255, 0.05);
   /* FIXED: Use flexbox for proper full screen layout */
   display: flex;
   flex-direction: column;
@@ -54,6 +76,8 @@ body {
   /* PERFORMANCE: Enable hardware acceleration */
   transform: translateZ(0);
   will-change: transform;
+  /* UPDATED: Add backdrop filter for glassmorphism */
+  backdrop-filter: blur(20px);
 }
 
 /* FIXED: Main container layout for full screen with raised header */
@@ -62,11 +86,18 @@ body {
   z-index: 20;
   /* FIXED: Account for raised header by reducing margin */
   margin-bottom: -10px;
+  /* UPDATED: Add glassmorphism background */
+  background: linear-gradient(180deg, rgba(var(--slate-800), 0.95), rgba(var(--slate-900), 0.98));
+  backdrop-filter: blur(20px);
+  border-radius: 15px 15px 0 0;
 }
 
 #calendarHeader {
   flex-shrink: 0; /* FIXED: Don't shrink calendar header */
   z-index: 15;
+  /* UPDATED: Add subtle background */
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
 }
 
 #calendar {
@@ -75,9 +106,9 @@ body {
   overflow: hidden;
 }
 
-/* Testing Environment Banner - PERFORMANCE OPTIMIZED */
+/* Testing Environment Banner - UPDATED THEME */
 #testingBanner, #serverBanner {
-  background: linear-gradient(135deg, #cc0000, #ff3333);
+  background: linear-gradient(135deg, var(--danger-red), var(--danger-red-dark));
   color: white;
   width: 100%;
   text-align: center;
@@ -85,27 +116,34 @@ body {
   font-size: 1.2rem;
   padding: 0.8rem 2rem;
   letter-spacing: 0.15em;
-  /* SIMPLIFIED SHADOW */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  /* UPDATED: Dashboard-style shadow */
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
   flex-shrink: 0;
   animation: pulse 3s infinite; /* Slower animation */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   border-radius: 20px 20px 0 0;
   margin: 0;
   box-sizing: border-box;
+  /* UPDATED: Add backdrop filter */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-/* Loading and Error States - PERFORMANCE OPTIMIZED */
+/* Loading and Error States - UPDATED THEME */
 #loadingIndicator {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(var(--slate-800), 0.95), rgba(var(--slate-900), 0.98));
+  color: var(--slate-50);
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
   z-index: 1001;
+  /* UPDATED: Dashboard-style effects */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   /* PERFORMANCE: Hardware acceleration */
   will-change: transform;
 }
@@ -114,17 +152,21 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: rgba(255, 0, 0, 0.9);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(220, 38, 38, 0.98));
   color: white;
-  padding: 1rem;
-  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
   z-index: 1001;
-  max-width: 300px;
+  max-width: 350px;
+  /* UPDATED: Dashboard-style effects */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.4);
   /* PERFORMANCE: Hardware acceleration */
   will-change: transform;
 }
 
-/* Utility Classes - PERFORMANCE OPTIMIZED */
+/* Utility Classes - UPDATED THEME */
 .fade-out {
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -142,6 +184,54 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(100, 181, 246, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-blue), 0.3), transparent);
   animation: loading 2s infinite; /* Slower for better performance */
 }
+
+/* UPDATED: Common glassmorphism utilities */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.glass-effect-strong {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* UPDATED: Modern shadow utilities */
+.shadow-soft {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-medium {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-strong {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* UPDATED: Color utilities using CSS variables */
+.text-primary { color: var(--primary-blue); }
+.text-success { color: var(--success-green); }
+.text-warning { color: var(--warning-orange); }
+.text-danger { color: var(--danger-red); }
+.text-slate-50 { color: var(--slate-50); }
+.text-slate-400 { color: var(--slate-400); }
+.text-slate-600 { color: var(--slate-600); }
+
+.bg-primary { background-color: var(--primary-blue); }
+.bg-success { background-color: var(--success-green); }
+.bg-warning { background-color: var(--warning-orange); }
+.bg-danger { background-color: var(--danger-red); }
+
+/* UPDATED: Border utilities */
+.border-primary { border-color: var(--primary-blue); }
+.border-success { border-color: var(--success-green); }
+.border-warning { border-color: var(--warning-orange); }
+.border-danger { border-color: var(--danger-red); }
+.border-slate-200 { border-color: var(--slate-200); }
+.border-slate-300 { border-color: var(--slate-300); }

@@ -1,7 +1,6 @@
-/* COMPLETE MODAL CSS - 60% Screen Size with Full Edit Features */
-/* Replace your existing modal CSS in components.css with this */
+/* COMPLETE MODAL CSS - 60% Screen Size with Full Edit Features - ADMIN DASHBOARD THEME */
 
-/* Modal Background */
+/* Modal Background - UPDATED THEME */
 .modal-bg {
   display: none !important;
   position: fixed;
@@ -10,7 +9,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   z-index: 9999;
   justify-content: center;
   align-items: center;
@@ -21,9 +20,10 @@
   display: flex !important;
 }
 
-/* Main Modal Container - 60% Screen Size */
+/* Main Modal Container - 60% Screen Size - UPDATED THEME */
 .modal {
-  background: linear-gradient(145deg, #232640, #1a1a2e);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
   width: 60vw;           /* 60% of viewport width */
@@ -33,8 +33,8 @@
   min-width: 600px;      /* Minimum width for smaller screens */
   min-height: 400px;     /* Minimum height for content */
   overflow: hidden;      /* Prevent modal itself from scrolling */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   position: relative;
   z-index: 10000;
   transform: translateZ(0);
@@ -43,30 +43,35 @@
   flex-direction: column;
 }
 
-/* Modal Header */
+/* Modal Header - UPDATED THEME */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(148, 163, 184, 0.2);
   padding-bottom: 1rem;
   flex-shrink: 0;        /* Don't shrink header */
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  backdrop-filter: blur(10px);
+  margin: -2rem -2rem 1.5rem -2rem;
+  padding: 1.5rem 2rem 1rem 2rem;
+  border-radius: 20px 20px 0 0;
 }
 
 .modal-title, #modalTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--slate-50);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   flex: 1;
 }
 
-/* Close Button */
+/* Close Button - UPDATED THEME */
 .close-btn, .modal-close {
-  background: none;
-  border: none;
-  color: #ff6b6b;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  color: var(--danger-red);
   font-size: 2rem;
   cursor: pointer;
   padding: 0;
@@ -76,22 +81,46 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .close-btn:hover, .modal-close:hover {
-  background: rgba(255, 107, 107, 0.2);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(239, 68, 68, 0.2));
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-/* Modal Body - Scrollable Content Area */
+/* Modal Body - Scrollable Content Area - UPDATED THEME */
 .modal-body {
   flex: 1;
   overflow-y: auto;
   padding-right: 8px;    /* Account for scrollbar */
   margin-right: -8px;    /* Pull scrollbar to edge */
+  color: var(--slate-50);
 }
 
-/* Summary Statistics */
+/* Custom scrollbar - UPDATED THEME */
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
+}
+
+/* Summary Statistics - UPDATED THEME */
 .summary-stats, .summary-counts {
   display: flex;
   gap: 2rem;
@@ -101,12 +130,14 @@
 }
 
 .stat-item {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(148, 163, 184, 0.1);
   min-width: 100px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .stat-number, .summary-counts strong {
@@ -114,7 +145,7 @@
   font-weight: 700;
   display: block;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  color: #ffffff;
+  color: var(--slate-50);
 }
 
 .stat-label {
@@ -123,29 +154,34 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-  color: #ffffff;
+  color: var(--slate-400);
 }
 
-/* Summary counts styling */
+/* Summary counts styling - UPDATED THEME */
 .summary-counts {
   margin-bottom: 1rem;
 }
 
 .summary-counts span {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--slate-50);
 }
 
-/* Table Styles - Optimized for 60% Modal */
+/* Table Styles - Optimized for 60% Modal - UPDATED THEME */
 .callout-table, .callouts-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
   font-size: 0.9rem;    /* Slightly smaller text to fit better */
-  background: transparent;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .callout-table th,
@@ -154,13 +190,14 @@
 .callouts-table td {
   padding: 0.8rem;      /* Reduced padding for better fit */
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--slate-50);
 }
 
 .callout-table th,
 .callouts-table th {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  backdrop-filter: blur(15px);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -169,6 +206,7 @@
   position: sticky;
   top: 0;              /* Sticky header when scrolling */
   z-index: 10;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .callout-table td,
@@ -185,13 +223,13 @@
   min-width: 120px;
 }
 
-/* Table row hover effect */
+/* Table row hover effect - UPDATED THEME */
 .callout-table tr:hover,
 .callouts-table tr:hover {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(59, 130, 246, 0.05) !important;
 }
 
-/* Status Badges */
+/* Status Badges - UPDATED THEME */
 .status-badge {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
@@ -201,27 +239,29 @@
   letter-spacing: 0.1em;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   display: inline-block;
+  backdrop-filter: blur(10px);
+  border: 2px solid;
 }
 
 .status-late {
-  background: rgba(255, 255, 0, 0.2);
-  color: #ffff00;
-  border: 1px solid #ffff00;
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warning-orange);
+  border-color: var(--warning-orange);
 }
 
 .status-out {
-  background: rgba(255, 0, 0, 0.2);
-  color: #ff0000;
-  border: 1px solid #ff0000;
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger-red);
+  border-color: var(--danger-red);
 }
 
 .status-unknown {
-  background: rgba(128, 128, 128, 0.2);
-  color: #cccccc;
-  border: 1px solid #cccccc;
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--slate-400);
+  border-color: var(--slate-400);
 }
 
-/* Action Buttons */
+/* Action Buttons - UPDATED THEME */
 .edit-btn, .delete-btn {
   border: none;
   padding: 6px 12px;
@@ -232,36 +272,42 @@
   transition: all 0.2s ease;
   text-transform: none;
   letter-spacing: normal;
+  backdrop-filter: blur(10px);
 }
 
 .edit-btn {
-  background: #ffc107;
+  background: linear-gradient(135deg, var(--warning-orange), var(--warning-orange-dark));
   color: #000;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 .edit-btn:hover {
-  background: #ffcd39;
+  background: linear-gradient(135deg, #fbbf24, var(--warning-orange));
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
 .delete-btn {
-  background: #dc3545;
+  background: linear-gradient(135deg, var(--danger-red), var(--danger-red-dark));
   color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
 .delete-btn:hover {
-  background: #c82333;
+  background: linear-gradient(135deg, #f87171, var(--danger-red));
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
 
-/* Form Styling for Add/Edit */
+/* Form Styling for Add/Edit - UPDATED THEME */
 .form-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
   z-index: 10001;
   display: flex;
   justify-content: center;
@@ -269,24 +315,25 @@
 }
 
 .form-container {
-  background: linear-gradient(145deg, #232640, #1a1a2e);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(20px);
   padding: 2rem;
   border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(148, 163, 184, 0.2);
   min-width: 400px;
   max-width: 500px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .form-container h3 {
-  color: white;
+  color: var(--slate-50);
   margin-top: 0;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .form-container label {
-  color: white;
+  color: var(--slate-50);
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -298,11 +345,17 @@
   width: 100%;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #000;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(5px);
+  color: var(--slate-50);
   font-size: 1rem;
   box-sizing: border-box;
+}
+
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+  color: var(--slate-400);
 }
 
 .form-container textarea {
@@ -325,47 +378,58 @@
   font-weight: bold;
   font-size: 1rem;
   transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 
 .btn-primary {
-  background: #007bff;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
   color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-  background: #0056b3;
+  background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .btn-success {
-  background: #28a745;
+  background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));
   color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .btn-success:hover {
-  background: #218838;
+  background: linear-gradient(135deg, #34d399, var(--success-green));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: linear-gradient(135deg, var(--slate-600), var(--slate-700));
   color: white;
+  box-shadow: 0 4px 12px rgba(71, 85, 105, 0.3);
 }
 
 .btn-secondary:hover {
-  background: #545b62;
+  background: linear-gradient(135deg, var(--slate-500), var(--slate-600));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(71, 85, 105, 0.4);
 }
 
-/* FIXED: Calendar-specific Add Button - Option A Green Border */
+/* FIXED: Calendar-specific Add Button - UPDATED THEME */
 .calendar-day .add-callout-btn {
   position: absolute;
   top: 0.25rem;
   left: 50%;
   transform: translateX(-50%);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(76, 175, 80, 0.6);
-  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+  color: var(--success-green);
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
   font-size: 0.6rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0.2rem 0.4rem;
   text-align: center;
   cursor: pointer;
@@ -378,23 +442,25 @@
   letter-spacing: 0.3px;
   white-space: nowrap;
   min-width: max-content;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
 }
 
 .calendar-day .add-callout-btn:hover {
-  background: transparent;
-  color: rgba(255, 255, 255, 1);
-  border-color: rgba(76, 175, 80, 0.9);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.2));
+  color: var(--slate-50);
+  border-color: rgba(16, 185, 129, 0.6);
   transform: translateX(-50%) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .calendar-day .add-callout-btn:active {
-  background: rgba(76, 175, 80, 0.8);
-  color: #ffffff;
-  border-color: rgba(76, 175, 80, 1);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(16, 185, 129, 0.3));
+  color: var(--slate-50);
+  border-color: rgba(16, 185, 129, 0.8);
   transform: translateX(-50%);
 }
 
-/* ADMIN PANEL STYLING */
+/* ADMIN PANEL STYLING - UPDATED THEME */
 
 /* Admin Panel Section Headers */
 .admin-section-header {
@@ -402,21 +468,26 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .admin-section-title {
   margin: 0;
-  color: white;
+  color: var(--slate-50);
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-/* Admin Add Callout Button - Different from calendar version */
+/* Admin Add Callout Button - Different from calendar version - UPDATED THEME */
 .admin-add-callout-btn {
   position: static;
   top: auto;
   right: auto;
-  background: #28a745;
+  background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));
   color: white;
   border: none;
   padding: 8px 16px;
@@ -427,21 +498,28 @@
   transition: all 0.2s ease;
   width: auto;
   height: auto;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .admin-add-callout-btn:hover {
-  background: #218838;
+  background: linear-gradient(135deg, #34d399, var(--success-green));
   transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
 }
 
-/* Admin Control Panel Tables */
+/* Admin Control Panel Tables - UPDATED THEME */
 .admin-user-table,
 .admin-callout-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
   font-size: 0.9rem;
-  background: transparent;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .admin-user-table th,
@@ -450,13 +528,14 @@
 .admin-callout-table td {
   padding: 0.8rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--slate-50);
 }
 
 .admin-user-table th,
 .admin-callout-table th {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  backdrop-filter: blur(15px);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -465,6 +544,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .admin-user-table td,
@@ -475,12 +555,12 @@
 
 .admin-user-table tr:hover,
 .admin-callout-table tr:hover {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(59, 130, 246, 0.05) !important;
 }
 
-/* Admin Button Styling */
+/* Admin Button Styling - UPDATED THEME */
 .admin-btn {
-  background: #4a3f78;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
   color: white;
   font-weight: 600;
   border: none;
@@ -488,17 +568,18 @@
   padding: 6px 14px;
   margin-left: 12px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 
 .admin-btn:hover {
-  background: #665aa3;
+  background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
-/* Responsive Design for Modal */
+/* Responsive Design for Modal - UPDATED THEME */
 @media (max-width: 1200px) {
   .modal {
     width: 70vw;         /* Larger percentage on smaller screens */
@@ -506,6 +587,7 @@
     max-width: 70vw;
     max-height: 70vh;
     min-width: 500px;
+    backdrop-filter: blur(15px);
   }
   
   .callout-table,
@@ -523,6 +605,12 @@
     min-width: 300px;
     min-height: 350px;
     padding: 1.5rem;
+    backdrop-filter: blur(12px);
+  }
+  
+  .modal-header {
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
   }
   
   .callout-table,
@@ -556,6 +644,12 @@
     max-height: 85vh;
     min-width: unset;
     padding: 1rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  .modal-header {
+    margin: -1rem -1rem 1rem -1rem;
+    padding: 0.75rem 1rem 1rem 1rem;
   }
   
   .callout-table,
@@ -586,7 +680,7 @@
   }
 }
 
-/* Edit/Delete Button Styles */
+/* Edit/Delete Button Styles - Additional Definitions - UPDATED THEME */
 .edit-btn,
 .delete-btn {
   padding: 4px 8px;
@@ -596,22 +690,29 @@
   cursor: pointer;
   border: none;
   transition: all 0.2s ease-in-out;
+  backdrop-filter: blur(10px);
 }
 
 .edit-btn {
-  background-color: #ffc107;
+  background: linear-gradient(135deg, var(--warning-orange), var(--warning-orange-dark));
   color: #000;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 .edit-btn:hover {
-  background-color: #e0a800;
+  background: linear-gradient(135deg, #fbbf24, var(--warning-orange));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, var(--danger-red), var(--danger-red-dark));
   color: #fff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
 .delete-btn:hover {
-  background-color: #bd2130;
+  background: linear-gradient(135deg, #f87171, var(--danger-red));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }

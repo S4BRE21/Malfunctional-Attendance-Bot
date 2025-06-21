@@ -1,38 +1,38 @@
-/* Calendar current day glow */
+/* PERFORMANCE-OPTIMIZED Calendar-specific Styles with Admin Dashboard Theme */
+
+/* Calendar current day glow - UPDATED COLORS */
 @keyframes currentDayGlow {
   0% { 
     box-shadow: 
-      0 0 15px 4px rgba(100, 181, 246, 0.4),
-      12px 12px 24px rgba(0, 0, 0, 0.8),
-      -12px -12px 24px rgba(80, 80, 120, 0.5);
+      0 0 15px 4px rgba(59, 130, 246, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   100% { 
     box-shadow: 
-      0 0 20px 6px rgba(100, 181, 246, 0.6),
-      12px 12px 24px rgba(0, 0, 0, 0.8),
-      -12px -12px 24px rgba(80, 80, 120, 0.5);
+      0 0 20px 6px rgba(59, 130, 246, 0.6),
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 }
 
-/* PERFORMANCE-OPTIMIZED Calendar-specific Styles with Clean Split Cell System */
-
-/* FLAT Day Header Cells - No background */
+/* FLAT Day Header Cells - UPDATED THEME */
 .header-cell, .calendar-header-day {
-  background: none;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.3));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--slate-50);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  border-radius: 0;   /* Remove border radius for flat look */
+  border-radius: 8px;
   height: 35px;
   padding: 0.25rem;
   box-sizing: border-box;
-  box-shadow: none;   /* Remove all shadows for flat look */
   position: relative;
-  border: none;       /* Remove border for flat look */
   text-transform: capitalize;
   letter-spacing: 0;
   text-align: center;
@@ -40,6 +40,7 @@
   overflow: hidden;
   width: 100%;
   opacity: 1.0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* FIXED: Calendar Grid - Full height with proper sizing */
@@ -69,16 +70,18 @@
   grid-template-rows: repeat(6, 1fr);
 }
 
-/* FIXED: Calendar Day Cells - Scale with container for full screen */
+/* FIXED: Calendar Day Cells - UPDATED DASHBOARD THEME */
 .calendar-day {
-  background: linear-gradient(145deg, #3a4070, #252850);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.8));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   font-size: 1rem;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--slate-50);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
   cursor: pointer;
   border-radius: 15px;
@@ -88,19 +91,18 @@
   width: 100%;  /* FIXED: Take full grid cell width */
   padding: 0.5rem; /* REDUCED: Tighter padding for compact day number */
   box-sizing: border-box;
-  /* SIMPLIFIED SHADOW - 60% performance improvement */
+  /* UPDATED: Dashboard-style shadows */
   box-shadow:
-    8px 8px 16px rgba(0, 0, 0, 0.6),
-    -8px -8px 16px rgba(70, 70, 100, 0.3);
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative; /* CRITICAL: For absolute positioned elements */
-  border: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
   /* PERFORMANCE: Use hardware acceleration */
   transform: translateZ(0);
   will-change: transform;
 }
 
-/* COMPACT Day Area with Callout Totals */
+/* COMPACT Day Area with Callout Totals - UPDATED COLORS */
 .day-number {
   font-size: 0.9rem; /* Compact but readable */
   font-weight: 700;
@@ -111,10 +113,11 @@
   width: 100%;
   text-align: center;
   padding-bottom: 0.25rem; /* Space for underline */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* FULL WIDTH UNDERLINE */
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3); /* UPDATED: Dashboard border color */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--slate-50);
 }
 
 /* Day Number - LOCKED CENTER - SMALLER */
@@ -124,21 +127,21 @@
   transform: translateX(-50%);
   font-size: 0.7rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--slate-50);
 }
 
-/* Callout Totals in Day Area */
+/* Callout Totals in Day Area - UPDATED COLORS */
 .callout-total-late {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #ffc107;
+  color: var(--warning-orange);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .callout-total-out {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #f44336;
+  color: var(--danger-red);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
@@ -196,7 +199,7 @@
 .callout-split-left {
   background: transparent;
   border: none;
-  color: #ffc107;
+  color: var(--warning-orange);
 }
 
 .callout-split-left:hover {
@@ -214,7 +217,7 @@
 .callout-split-right {
   background: transparent;
   border: none;
-  color: #f44336;
+  color: var(--danger-red);
 }
 
 .callout-split-right:hover {
@@ -228,16 +231,15 @@
   border: none;
 }
 
-/* Split Cell Content - REMOVED LABELS */
-
-/* ENHANCED: Past day styling - Greyed out with no overlay needed */
+/* ENHANCED: Past day styling - UPDATED THEME */
 .calendar-day.past-day {
-  color: #666677;
-  background: linear-gradient(145deg, #2a2a40, #1f1f35);
+  color: var(--slate-500);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(30, 41, 59, 0.3));
+  backdrop-filter: blur(5px);
   box-shadow:
-    inset 4px 4px 8px rgba(0, 0, 0, 0.4),
-    inset -4px -4px 8px rgba(40, 40, 55, 0.2);
-  border: 1px solid rgba(102, 102, 119, 0.3);
+    inset 0 2px 8px rgba(0, 0, 0, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.08);
   cursor: not-allowed;
 }
 
@@ -246,18 +248,19 @@
 .calendar-day.past-day .day-number-text,
 .calendar-day.past-day .callout-total-late,
 .calendar-day.past-day .callout-total-out {
-  color: #666677;
+  color: var(--slate-500);
   opacity: 0.7;
 }
 
-/* PERFORMANCE: Simplified adjacent month styling */
+/* PERFORMANCE: Simplified adjacent month styling - UPDATED THEME */
 .calendar-day.adjacent-month {
-  color: #727a9a;
-  background: linear-gradient(145deg, #1a1f35, #0f1425);
+  color: var(--slate-400);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.4));
+  backdrop-filter: blur(8px);
   box-shadow:
-    8px 8px 16px rgba(0, 0, 0, 0.6),
-    -8px -8px 16px rgba(40, 45, 70, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.1);
   cursor: pointer;
   border-radius: 15px;
 }
@@ -265,7 +268,11 @@
 /* PERFORMANCE: Only transform on hover - no shadow changes */
 .calendar-day:hover:not(.empty):not(.adjacent-month):not(.past-day) {
   transform: translateY(-3px) translateZ(0);
-  border: 1px solid rgba(100, 181, 246, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.9));
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .calendar-day.past-day:hover {
@@ -275,19 +282,21 @@
 
 .calendar-day.adjacent-month:hover {
   transform: translateY(-2px) translateZ(0);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.5));
 }
 
-/* PERFORMANCE: Static current day styling - no infinite animation */
+/* PERFORMANCE: Static current day styling - UPDATED THEME */
 .calendar-day.current-day {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(30, 41, 59, 0.9)) !important;
+  border: 2px solid var(--primary-blue) !important;
+  color: var(--slate-50) !important;
   box-shadow:
-    0 0 15px 4px rgba(100, 181, 246, 0.5),
-    8px 8px 16px rgba(0, 0, 0, 0.6),
-    -8px -8px 16px rgba(80, 80, 120, 0.4);
-  border: 2px solid rgba(100, 181, 246, 0.8) !important;
-  background: linear-gradient(145deg, #4a5090, #353870) !important;
-  color: #ffffff !important;
+    0 0 20px 4px rgba(59, 130, 246, 0.3),
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transform: translateY(-2px) translateZ(0);
+  backdrop-filter: blur(15px);
 }
 
 /* Only animate on hover - MUCH better performance */
@@ -306,7 +315,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   STACKED CALLOUT NAMES SYSTEM with YELLOW NAMES + GREEN DELAYS
+   STACKED CALLOUT NAMES SYSTEM with UPDATED COLORS
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* Callout name styling - stacked vertically with no backgrounds */
@@ -337,21 +346,21 @@
   transform: translateY(0);
 }
 
-/* Color coding for callout types with delay styling */
+/* Color coding for callout types with delay styling - UPDATED COLORS */
 .callout-name.late {
-  color: #ffc107;
+  color: var(--warning-orange);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .callout-name.late .delay-text {
-  color: #4caf50; /* Green for delay */
+  color: var(--success-green); /* Green for delay */
   margin-left: 0.3rem;
   font-weight: 600;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .callout-name.out {
-  color: #f44336;
+  color: var(--danger-red);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
@@ -395,6 +404,7 @@
   .calendar-day {
     padding: 0.4rem;
     border-radius: 10px;
+    backdrop-filter: blur(8px);
   }
 
   .day-number {
@@ -428,6 +438,13 @@
     padding: 0.2rem;
   }
 
+  /* Header cells responsive */
+  .header-cell, .calendar-header-day {
+    font-size: 0.85rem;
+    height: 30px;
+    backdrop-filter: blur(8px);
+  }
+
   /* Callout names responsive - tablet */
   .callout-name {
     font-size: 0.55rem;
@@ -453,6 +470,7 @@
   .calendar-day {
     padding: 0.3rem;
     border-radius: 8px;
+    backdrop-filter: blur(6px);
   }
 
   .day-number {
@@ -486,6 +504,13 @@
     padding: 0.15rem;
   }
 
+  /* Header cells responsive */
+  .header-cell, .calendar-header-day {
+    font-size: 0.8rem;
+    height: 25px;
+    backdrop-filter: blur(6px);
+  }
+
   /* Callout names responsive - mobile */
   .callout-name {
     font-size: 0.5rem;
@@ -511,6 +536,7 @@
 @media (min-width: 1200px) {
   .calendar-day {
     padding: 0.6rem;
+    backdrop-filter: blur(12px);
   }
   
   .day-number {
@@ -538,6 +564,13 @@
     padding: 0.3rem;
   }
 
+  /* Header cells responsive */
+  .header-cell, .calendar-header-day {
+    font-size: 1rem;
+    height: 35px;
+    backdrop-filter: blur(12px);
+  }
+
   /* Callout names responsive - large screens */
   .callout-name {
     font-size: 0.7rem;
@@ -562,6 +595,7 @@
 @media (min-width: 1600px) {
   .calendar-day {
     padding: 0.75rem;
+    backdrop-filter: blur(15px);
   }
   
   .day-number {
@@ -587,6 +621,13 @@
   .callout-split-right {
     font-size: 1rem;
     padding: 0.4rem;
+  }
+
+  /* Header cells responsive */
+  .header-cell, .calendar-header-day {
+    font-size: 1.1rem;
+    height: 40px;
+    backdrop-filter: blur(15px);
   }
 
   /* Callout names responsive - extra large screens */
