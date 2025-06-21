@@ -1,4 +1,4 @@
-// modules/calendar.js - Enhanced with one callout per day validation
+// modules/calendar.js - Enhanced with one callout per day validation - FIXED TIMEZONE ERRORS
 // Complete working version - drop-in replacement
 
 import { 
@@ -9,7 +9,7 @@ import {
   formatTimeForUser,
   convertFromServerTime,
   convertToServerTime,
-  convertUserTodayToServerDate
+  formatDateForComparison
 } from './utils.js';
 
 export class AttendanceCalendar {
@@ -127,7 +127,7 @@ export class AttendanceCalendar {
       });
     }
     
-    // TIMEZONE: Enhanced date change handler with timezone awareness
+    // FIXED: Enhanced date change handler with proper timezone conversion
     const dateInput = document.getElementById('calloutDate');
     if (dateInput) {
       dateInput.addEventListener('change', () => {
@@ -185,36 +185,51 @@ export class AttendanceCalendar {
     console.log('[calendar] Status set to:', status);
   }
 
-  // TIMEZONE: Enhanced existing callout check with timezone awareness
+  // FIXED: Enhanced existing callout check with proper timezone conversion
   async checkExistingCallout(dateString) {
-    // Convert input date to server timezone for comparison using your existing function
-    const serverDate = convertUserTodayToServerDate(dateString);
-    
-    const existingCallouts = this.callouts.filter(callout => {
-      const calloutDate = new Date(callout.date).toISOString().split("T")[0];
-      return calloutDate === serverDate;
-    });
-    
-    const warningDiv = document.getElementById('existingCalloutWarning');
-    const warningText = document.getElementById('existingCalloutText');
-    
-    if (existingCallouts.length > 0 && !this.currentEditingCallout) {
-      const callout = existingCallouts[0];
-      const statusText = callout.status === 'LATE' ? 
-        `Late (${callout.delay_minutes || 0} minutes)` : 'Out';
+    try {
+      console.log('[calendar] Checking existing callout for date:', dateString);
       
-      const userDateDisplay = formatDateForUser(callout.date, this.userTimezone);
-      warningText.textContent = `You already have a ${statusText} callout for ${userDateDisplay}. Saving will replace the existing callout.`;
-      warningDiv.style.display = 'flex';
-    } else {
-      warningDiv.style.display = 'none';
+      // FIXED: Convert the input date to server timezone for comparison
+      const serverDate = formatDateForComparison(dateString, this.userTimezone);
+      
+      console.log('[calendar] Converted date for comparison:', serverDate);
+      
+      const existingCallouts = this.callouts.filter(callout => {
+        const calloutDate = new Date(callout.date).toISOString().split("T")[0];
+        return calloutDate === serverDate;
+      });
+      
+      const warningDiv = document.getElementById('existingCalloutWarning');
+      const warningText = document.getElementById('existingCalloutText');
+      
+      if (existingCallouts.length > 0 && !this.currentEditingCallout) {
+        const callout = existingCallouts[0];
+        const statusText = callout.status === 'LATE' ? 
+          `Late (${callout.delay_minutes || 0} minutes)` : 'Out';
+        
+        const userDateDisplay = formatDateForUser(callout.date, this.userTimezone);
+        warningText.textContent = `You already have a ${statusText} callout for ${userDateDisplay}. Saving will replace the existing callout.`;
+        warningDiv.style.display = 'flex';
+      } else {
+        warningDiv.style.display = 'none';
+      }
+    } catch (error) {
+      console.error('[calendar] Error checking existing callout:', error);
+      // Don't show warning if there's an error
+      const warningDiv = document.getElementById('existingCalloutWarning');
+      if (warningDiv) {
+        warningDiv.style.display = 'none';
+      }
     }
   }
 
   // NEW: Check for duplicate callouts with simple confirmation
   async checkForDuplicateCallout(calloutData, userDate) {
     const currentUser = calloutData.user.toLowerCase();
-    const checkDate = userDate; // Use the date string directly
+    
+    // FIXED: Convert user date to server date for comparison
+    const checkDate = formatDateForComparison(userDate, this.userTimezone);
     
     // Find existing callouts for this user on this date
     const existingCallouts = this.callouts.filter(callout => {
@@ -355,7 +370,7 @@ export class AttendanceCalendar {
     }
   }
 
-  // TIMEZONE: Enhanced form submission with timezone conversion and duplicate prevention
+  // FIXED: Enhanced form submission with proper timezone conversion and duplicate prevention
   async handleEnhancedCalloutSubmit(event) {
     event.preventDefault();
     
@@ -366,9 +381,9 @@ export class AttendanceCalendar {
     const formData = new FormData(event.target);
     const status = formData.get('status');
     
-    // TIMEZONE: Convert date from user timezone to server timezone using your function
+    // FIXED: Convert date from user timezone to server timezone using proper function
     const userDate = formData.get('date');
-    const serverDate = convertToServerTime(userDate);
+    const serverDate = formatDateForComparison(userDate, this.userTimezone);
     
     const calloutData = {
       user: formData.get('user').trim(),
