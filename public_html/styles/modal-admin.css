@@ -1,0 +1,409 @@
+/* ADMIN MODAL SYSTEM - Full screen admin panel with tabs, tables, and management tools */
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ADMIN MODAL CONTAINER - Full Screen Design
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .modal {
+  width: 95vw !important;
+  height: 95vh !important;
+  max-width: 95vw !important;
+  max-height: 95vh !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0;
+  margin: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ADMIN MODAL HEADER
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#adminModal .modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #64b5f6;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#adminModal .modal-close {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+#adminModal .modal-close:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TAB NAVIGATION SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .tab-nav {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+#adminModal .tab-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+#adminModal .tab-button.active {
+  color: #64b5f6;
+  border-bottom-color: #64b5f6;
+  background: rgba(100, 181, 246, 0.1);
+}
+
+#adminModal .tab-button:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#adminModal .tab-badge {
+  background: #ff6b6b;
+  color: white;
+  border-radius: 12px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  min-width: 1.5rem;
+  text-align: center;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+#adminModal .tab-button.active .tab-badge {
+  background: #64b5f6;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MODAL BODY - Scrollable Content Area
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .modal-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TAB PANELS - Content Switching
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .tab-panel {
+  display: none;
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+#adminModal .tab-panel.active {
+  display: flex;
+  flex-direction: column;
+  animation: fadeInPanel 0.3s ease-in;
+}
+
+@keyframes fadeInPanel {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ADMIN SECTION HEADERS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+#adminModal .section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #64b5f6;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#adminModal .section-icon {
+  font-size: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ADMIN TABLES - Fixed Layout and Styling
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .admin-user-table,
+#adminModal .admin-callout-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex: 1;
+  min-height: 0;
+}
+
+#adminModal .admin-user-table th,
+#adminModal .admin-user-table td,
+#adminModal .admin-callout-table th,
+#adminModal .admin-callout-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#adminModal .admin-user-table th,
+#adminModal .admin-callout-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+#adminModal .admin-user-table tbody tr:hover,
+#adminModal .admin-callout-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+#adminModal .admin-user-table tbody tr:nth-child(even),
+#adminModal .admin-callout-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TABLE CONTAINER - Proper scrolling
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal #userTableContainer,
+#adminModal #calloutTableContainer {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar for admin tables */
+#adminModal #userTableContainer::-webkit-scrollbar,
+#adminModal #calloutTableContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+#adminModal #userTableContainer::-webkit-scrollbar-track,
+#adminModal #calloutTableContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+#adminModal #userTableContainer::-webkit-scrollbar-thumb,
+#adminModal #calloutTableContainer::-webkit-scrollbar-thumb {
+  background: rgba(100, 181, 246, 0.5);
+  border-radius: 4px;
+}
+
+#adminModal #userTableContainer::-webkit-scrollbar-thumb:hover,
+#adminModal #calloutTableContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 181, 246, 0.7);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   FILTER DROPDOWNS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#adminModal .filter-dropdown {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  width: 120px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#adminModal .filter-dropdown:focus {
+  outline: none;
+  border-color: #64b5f6;
+  background: rgba(100, 181, 246, 0.1);
+  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+}
+
+#adminModal .filter-dropdown:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+#adminModal .filter-dropdown option {
+  background: #2a2d3a;
+  color: #ffffff;
+  padding: 0.5rem;
+}
+
+/* Filter row styling */
+#adminModal .filter-row {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#adminModal .filter-row th {
+  padding: 0.75rem !important;
+  background: transparent !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN FOR ADMIN MODAL
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+  #adminModal .modal {
+    width: 98vw !important;
+    height: 98vh !important;
+    max-width: 98vw !important;
+    max-height: 98vh !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #adminModal .modal {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border-radius: 0;
+  }
+  
+  #adminModal .modal-header {
+    padding: 1rem;
+  }
+  
+  #adminModal .tab-panel {
+    padding: 1rem;
+  }
+  
+  #adminModal .tab-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  #adminModal .admin-user-table th,
+  #adminModal .admin-user-table td,
+  #adminModal .admin-callout-table th,
+  #adminModal .admin-callout-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  #adminModal .filter-dropdown {
+    width: 100px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #adminModal .modal-header {
+    padding: 0.75rem;
+  }
+  
+  #adminModal .modal-title {
+    font-size: 1.2rem;
+  }
+  
+  #adminModal .tab-panel {
+    padding: 0.75rem;
+  }
+  
+  #adminModal .tab-button {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  #adminModal .admin-user-table th,
+  #adminModal .admin-user-table td,
+  #adminModal .admin-callout-table th,
+  #adminModal .admin-callout-table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  #adminModal .filter-dropdown {
+    width: 80px;
+    font-size: 0.65rem;
+  }
+}

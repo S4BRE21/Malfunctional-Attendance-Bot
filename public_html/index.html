@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Malfunctional Attendance</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/admin.css" />
+  <!-- FontAwesome for dashboard icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script type="module" src="modules/index.js"></script>
+</head>
+<body>
+
+  <div id="header" class="main-header"></div>
+  <div id="calendarHeader"></div>
+  <div id="calendar"></div>
+
+  <div id="testingModal" class="testing-modal">
+    <div class="testing-modal-content">
+      <h2>Site in Testing</h2>
+      <p>This site is in testing mode. Content may be unstable.</p>
+      <button class="testing-ok-btn" onclick="document.getElementById('testingModal').classList.remove('show')">OK</button>
+    </div>
+  </div>
+
+  <div id="adminModal" class="modal-bg" style="display: none;">
+    <div class="modal admin-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">🛠️ Admin Control Panel - New Role System</h2>
+        <button class="modal-close" id="closeAdminModal">×</button>
+      </div>
+      
+      <!-- Tab Navigation -->
+      <div class="tab-nav">
+        <button class="tab-button active" data-tab="users">
+          👥 Users
+          <span class="tab-badge" id="usersBadge">0</span>
+        </button>
+        <button class="tab-button" data-tab="callouts">
+          📅 Callouts
+          <span class="tab-badge" id="calloutsBadge">0</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Users Tab -->
+        <div id="users-tab" class="tab-panel active">
+          <section id="userTableSection">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-icon">👥</span>
+                User Management - ADMIN/RAIDER/F&F System
+              </h3>
+            </div>
+            
+            <!-- NEW: Role System Explanation -->
+            <div style="background: rgba(100, 181, 246, 0.1); border: 1px solid rgba(100, 181, 246, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+              <strong>🎯 Role System:</strong><br>
+              <span style="color: #ffc107;">● ADMIN</span> - Full permissions (backend: is_admin = true)<br>
+              <span style="color: #28a745;">● RAIDER</span> - Standard user (backend: is_admin = false)<br>
+              <span style="color: #17a2b8;">● F&F</span> - Friends & Family (website-only designation)
+            </div>
+            
+            <div id="userTableContainer">Loading users...</div>
+          </section>
+        </div>
+        
+        <!-- Callouts Tab -->
+        <div id="callouts-tab" class="tab-panel">
+          <section id="calloutTableSection">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-icon">📅</span>
+                Callout Management
+              </h3>
+            </div>
+            <div id="calloutTableContainer">Loading callouts...</div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEAN Callout Modal - No Emojis, Admin Style -->
+  <div id="calloutModal" class="modal-bg" style="display: none;">
+    <div class="modal callout-modal-enhanced">
+      <div class="modal-header-enhanced">
+        <h2 id="calloutModalTitle">Add New Callout</h2>
+        <button class="modal-close-enhanced" id="calloutModalClose">×</button>
+      </div>
+      
+      <form id="calloutForm" class="callout-form-enhanced">
+        <!-- User Field -->
+        <div class="form-group-enhanced">
+          <label class="form-label-enhanced">
+            User
+          </label>
+          <div class="input-wrapper-enhanced">
+            <input id="calloutUser" name="user" class="form-input-enhanced" placeholder="Enter user name" required />
+            <div class="input-validation" id="userValidation"></div>
+          </div>
+        </div>
+
+        <!-- Status Selection with Clean Buttons -->
+        <div class="form-group-enhanced">
+          <label class="form-label-enhanced">
+            Status
+          </label>
+          <div class="status-button-group">
+            <button type="button" class="status-btn status-btn-late" id="statusLateBtn" data-status="LATE">
+              <span class="status-text">Late</span>
+            </button>
+            <button type="button" class="status-btn status-btn-out" id="statusOutBtn" data-status="OUT">
+              <span class="status-text">Out</span>
+            </button>
+          </div>
+          <input type="hidden" id="calloutStatus" name="status" value="OUT" />
+        </div>
+
+        <!-- Date Field -->
+        <div class="form-group-enhanced">
+          <label class="form-label-enhanced">
+            Date
+          </label>
+          <div class="input-wrapper-enhanced">
+            <input type="date" id="calloutDate" name="date" class="form-input-enhanced" required />
+            <div class="input-validation" id="dateValidation"></div>
+          </div>
+        </div>
+
+        <!-- Delay Field (Only shows when Late is selected) -->
+        <div class="form-group-enhanced" id="delayFieldGroup" style="display: none;">
+          <label class="form-label-enhanced">
+            Duration (minutes)
+          </label>
+          <div class="input-wrapper-enhanced">
+            <input type="number" id="calloutDelay" name="delay" class="form-input-enhanced" 
+                   min="1" max="480" placeholder="Required: Enter duration in minutes" required />
+            <div class="input-hint">Required for Late status • Maximum 8 hours (480 minutes)</div>
+            <div class="input-validation" id="delayValidation"></div>
+            <div class="ai-note">
+              <span class="ai-text">Language model coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reason Field with Character Counter -->
+        <div class="form-group-enhanced">
+          <label class="form-label-enhanced">
+            Reason
+          </label>
+          <div class="input-wrapper-enhanced">
+            <textarea id="calloutReason" name="reason" class="form-textarea-enhanced" 
+                       rows="3" placeholder="Optional: Provide reason for callout..." maxlength="125"></textarea>
+            <div class="character-counter">
+              <span id="reasonCharCount">0</span>/125 characters
+            </div>
+            <div class="input-validation" id="reasonValidation"></div>
+          </div>
+        </div>
+
+        <!-- Existing Callout Warning (shown when editing) -->
+        <div id="existingCalloutWarning" class="existing-callout-warning" style="display: none;">
+          <div class="warning-icon">WARNING</div>
+          <div class="warning-content">
+            <strong>Existing Callout Found</strong>
+            <p id="existingCalloutText"></p>
+          </div>
+        </div>
+
+        <!-- Action Buttons - Clean Style -->
+        <div class="form-actions-enhanced">
+          <button type="submit" id="calloutSubmit" class="btn-enhanced btn-primary-enhanced">
+            <span class="btn-text">Save Callout</span>
+          </button>
+          <button type="button" id="calloutCancel" class="btn-enhanced btn-secondary-enhanced">
+            <span class="btn-text">Cancel</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core Modules -->
+  <script type="module" src="modules/auth.js"></script>
+  <script type="module" src="modules/header.js"></script>
+  <script type="module" src="modules/calendar.js"></script>
+  <script type="module" src="modules/cdropdown.js"></script>
+  <script type="module" src="modules/errors.js"></script>
+  <script type="module" src="modules/utils.js"></script>
+  <!-- API Modules -->
+  <script type="module" src="modules/api/calloutAPI.js"></script>
+  <script type="module" src="modules/api/userAPI.js"></script>
+  <script type="module" src="modules/api/adminAPI.js"></script>
+  <script type="module" src="modules/api/adminCallouts.js"></script>
+
+</body>
+</html>

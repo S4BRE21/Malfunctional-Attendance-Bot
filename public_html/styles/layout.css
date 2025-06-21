@@ -1,0 +1,88 @@
+/* FIXED: Layout - Clean header with proper full-height calendar alignment */
+
+/* FIXED: Main layout containers for proper full screen flex layout */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* FIXED: Header takes fixed space, doesn't shrink */
+#header {
+  flex-shrink: 0; /* FIXED: Header stays fixed size */
+  z-index: 20;
+  position: relative;
+}
+
+/* FIXED: Calendar header positioned properly with adequate height */
+#calendarHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  user-select: none;
+  margin-bottom: 10px; /* FIXED: Proper spacing to calendar grid */
+  position: relative;
+  z-index: 15;
+  gap: 15px;
+  height: 35px; /* FIXED: Set explicit height for calendar header */
+  flex-shrink: 0; /* FIXED: Calendar header doesn't shrink */
+  /* PERFORMANCE: Hardware acceleration */
+  transform: translateZ(0);
+}
+
+/* FIXED: Calendar takes all remaining height for full screen */
+#calendar {
+  flex: 1; /* FIXED: Calendar takes all remaining height */
+  min-height: 0; /* FIXED: Allow shrinking if absolutely necessary */
+  overflow: hidden;
+  position: relative;
+  /* Ensure it's treated as a grid container */
+  display: grid;
+}
+
+/* FIXED: Modal and testing modal positioning - don't interfere with layout */
+#modalBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: none;
+}
+
+#modalBg.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#testingModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: none;
+}
+
+#testingModal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FIXED: Ensure calendar dropdowns don't interfere with layout */
+.cdropdown-header {
+  position: absolute;
+  z-index: 25;
+}
+
+/* FIXED: Testing banner doesn't interfere with main layout */
+#testingBanner, #serverBanner {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 30;
+}

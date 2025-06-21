@@ -1,0 +1,817 @@
+/* ADMIN SYSTEM - Enhanced Admin panels with statistics dashboard */
+/* UPDATED: New Role System - ADMIN/RAIDER/F&F with Statistics Dashboard */
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ENHANCED STATISTICS DASHBOARD
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Panel Header */
+.panel-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.panel-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #64b5f6;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.panel-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Statistics Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stats-grid.bottom-row {
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+  color: #ffffff;
+}
+
+/* Color coding for different stats */
+.admins .stat-number { color: #ffc107; } /* Officers */
+.raiders .stat-number { color: #4caf50; }
+.friends-family .stat-number { color: #17a2b8; }
+.total-callouts .stat-number { color: #f44336; }
+.this-week .stat-number { color: #ff9800; }
+.today .stat-number { color: #4caf50; }
+
+/* Role Distribution Section */
+.role-distribution {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.role-card .stat-number {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Summary Bar */
+.summary-bar {
+  background: rgba(100, 181, 246, 0.1);
+  border: 1px solid rgba(100, 181, 246, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TAB SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  margin: -2rem -2rem 0 -2rem; /* Extend to modal edges */
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 1.5rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tab-button.active {
+  color: #64b5f6;
+  border-bottom-color: #64b5f6;
+  background: rgba(100, 181, 246, 0.1);
+}
+
+.tab-button:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-badge {
+  background: #ff6b6b;
+  color: white;
+  border-radius: 12px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.tab-button.active .tab-badge {
+  background: #64b5f6;
+}
+
+/* Tab Content */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #64b5f6;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.section-icon {
+  font-size: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ROLE SYSTEM - ADMIN/RAIDER/F&F with Transparent Badges
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Role Badges - Updated to match action button styling */
+.role-admin {
+  color: #ffc107;           /* Keep yellow for OFFICER */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  border: 2px solid #ffc107;
+  background: none;
+  display: inline-block;
+}
+
+.role-raider {
+  color: #4caf50;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  border: 2px solid #4caf50;
+  background: none;
+  display: inline-block;
+}
+
+.role-ff {
+  color: #17a2b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  border: 2px solid #17a2b8;
+  background: none;
+  display: inline-block;
+}
+
+/* Legacy support - keep role-user class pointing to RAIDER */
+.role-user {
+  color: #4caf50;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  border: 2px solid #4caf50;
+  background: none;
+  display: inline-block;
+}
+
+/* Crown Icon for Protected Users (Admins) */
+.crown-icon {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ACTION BUTTONS - Uniform styling
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Action Button Container */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Compact Enhanced Button Style for ALL admin buttons */
+.btn-enhanced {
+  background: none;
+  border: 2px solid;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: none;
+  letter-spacing: normal;
+  min-width: 50px;
+  width: auto;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+/* Promote Button - Green Theme (Success) */
+.promote-btn {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.promote-btn:hover:not(:disabled) {
+  background: rgba(76, 175, 80, 0.15);
+  border-color: #66bb6a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Demote Button - Orange Theme (Warning) */
+.demote-btn {
+  border-color: #ff9800;
+  color: #ff9800;
+}
+
+.demote-btn:hover:not(:disabled) {
+  background: rgba(255, 152, 0, 0.15);
+  border-color: #ffb74d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+}
+
+/* F&F Button - Cyan Theme */
+.ff-btn {
+  border-color: #17a2b8;
+  color: #17a2b8;
+}
+
+.ff-btn:hover:not(:disabled) {
+  background: rgba(23, 162, 184, 0.15);
+  border-color: #1cbbc4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3);
+}
+
+/* Raider Button - Green Theme */
+.raider-btn {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.raider-btn:hover:not(:disabled) {
+  background: rgba(76, 175, 80, 0.15);
+  border-color: #66bb6a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Delete Button - Red Theme (Danger) */
+.delete-btn {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: rgba(244, 67, 54, 0.15);
+  border-color: #ef5350;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+/* Protected Button - Disabled State */
+.protected-btn {
+  border-color: #f44336;
+  color: #f44336;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Enhanced Button Variants */
+.edit-btn-enhanced,
+.delete-btn-enhanced {
+  background: none;
+  border: 2px solid;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: none;
+  letter-spacing: normal;
+  min-width: 50px;
+  width: auto;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.edit-btn-enhanced {
+  border-color: #2196f3;
+  color: #2196f3;
+}
+
+.edit-btn-enhanced:hover:not(:disabled) {
+  background: rgba(33, 150, 243, 0.15);
+  border-color: #42a5f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.delete-btn-enhanced {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+.delete-btn-enhanced:hover:not(:disabled) {
+  background: rgba(244, 67, 54, 0.15);
+  border-color: #ef5350;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+/* Disabled State for All Enhanced Buttons */
+.btn-enhanced:disabled,
+.edit-btn-enhanced:disabled,
+.delete-btn-enhanced:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-enhanced:disabled:hover,
+.edit-btn-enhanced:disabled:hover,
+.delete-btn-enhanced:disabled:hover {
+  transform: none;
+  background: none;
+  box-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TABLE STYLING - Enhanced for Admin Panel
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.admin-user-table,
+.admin-callout-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  table-layout: fixed;
+}
+
+/* Equal width columns - split the space evenly for user table */
+.admin-user-table th,
+.admin-user-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 33.33%;
+}
+
+/* Names column - left aligned */
+.admin-user-table th:first-child,
+.admin-user-table td:first-child {
+  text-align: left;
+}
+
+/* Role column - centered */
+.admin-user-table th:nth-child(2),
+.admin-user-table td:nth-child(2) {
+  text-align: center;
+}
+
+/* Actions column - centered */
+.admin-user-table th:last-child,
+.admin-user-table td:last-child {
+  text-align: center;
+}
+
+/* Callout table maintains original styling */
+.admin-callout-table th,
+.admin-callout-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.admin-user-table th,
+.admin-callout-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  vertical-align: top;
+}
+
+.admin-user-table td,
+.admin-callout-table td {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
+}
+
+.admin-user-table tr:hover,
+.admin-callout-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.admin-user-table tbody tr:nth-child(even),
+.admin-callout-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Enhanced Cell Styling */
+.user-name {
+  font-weight: 700;
+  color: #ffffff;
+  display: block;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.user-id {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: monospace;
+}
+
+/* Filter Dropdowns */
+.filter-dropdown {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  width: 120px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  max-width: 120px;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #64b5f6;
+  background: rgba(100, 181, 246, 0.1);
+  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+}
+
+.filter-dropdown:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.filter-dropdown option {
+  background: #2a2d3a;
+  color: #ffffff;
+  padding: 0.5rem;
+}
+
+/* Filter Row Styling */
+.filter-row {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.filter-row th {
+  padding: 0.75rem !important;
+  background: transparent !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Status Badges and Other Elements */
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-align: center;
+  min-width: 60px;
+  border: 2px solid;
+}
+
+.status-badge.late {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+  border-color: #ffc107;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+}
+
+.status-badge.out {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border-color: #f44336;
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+}
+
+/* Admin Add Button */
+.admin-add-callout-btn-enhanced {
+  background: linear-gradient(145deg, #4caf50, #388e3c);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.admin-add-callout-btn-enhanced:hover {
+  background: linear-gradient(145deg, #66bb6a, #4caf50);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+/* Admin Button Styling */
+.admin-btn {
+  background: #4a3f78;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  margin-left: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.admin-btn:hover {
+  background: #665aa3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .role-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .tab-button {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .tab-nav {
+    margin: -1.5rem -1.5rem 0 -1.5rem;
+  }
+
+  .admin-callout-table,
+  .admin-user-table {
+    font-size: 0.8rem;
+  }
+
+  .admin-callout-table th,
+  .admin-callout-table td,
+  .admin-user-table th,
+  .admin-user-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: 200px;
+  }
+
+  .btn-enhanced,
+  .promote-btn,
+  .demote-btn,
+  .ff-btn,
+  .raider-btn,
+  .delete-btn,
+  .protected-btn,
+  .edit-btn-enhanced,
+  .delete-btn-enhanced {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    min-width: 40px;
+    height: 28px;
+  }
+
+  .filter-dropdown {
+    width: 90px;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-button {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .tab-nav {
+    margin: -1rem -1rem 0 -1rem;
+  }
+
+  .admin-callout-table th,
+  .admin-callout-table td,
+  .admin-user-table th,
+  .admin-user-table td {
+    padding: 0.5rem 0.25rem;
+  }
+
+  .status-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    min-width: 50px;
+  }
+
+  .user-name {
+    font-size: 0.9rem;
+  }
+
+  .btn-enhanced,
+  .promote-btn,
+  .demote-btn,
+  .ff-btn,
+  .raider-btn,
+  .delete-btn,
+  .protected-btn,
+  .edit-btn-enhanced,
+  .delete-btn-enhanced {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    min-width: 35px;
+    height: 26px;
+  }
+
+  .filter-dropdown {
+    width: 80px;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+  }
+}

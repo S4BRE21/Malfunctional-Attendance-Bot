@@ -1,0 +1,16 @@
+# Enable rewrite engine
+RewriteEngine On
+RewriteBase /
+
+# Proxy /api and /auth routes to Node.js server on port 3001
+# This uses mod_rewrite with the P flag to forward all methods (GET, POST, PUT, etc.)
+RewriteCond %{REQUEST_URI} ^/(api|auth)(/.*)?$
+RewriteRule ^(api|auth)(/.*)?$ http://127.0.0.1:3001/$1$2 [P,L]
+
+# For all other URIs, serve files normally
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect everything else to index.html (for SPA front-end routing)
+RewriteRule ^ index.html [L]

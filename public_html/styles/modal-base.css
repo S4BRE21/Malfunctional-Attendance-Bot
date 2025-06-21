@@ -1,0 +1,187 @@
+/* MODAL BASE SYSTEM - Core modal backgrounds, z-index management, and shared functionality */
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MODAL BACKGROUNDS AND Z-INDEX MANAGEMENT
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.modal-bg {
+  display: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  will-change: opacity, transform;
+}
+
+.modal-bg.show {
+  display: flex !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   Z-INDEX HIERARCHY - Prevents modal conflicts
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Admin Modal - Lower priority, full screen */
+#adminModal {
+  z-index: 9999 !important;
+}
+
+/* Callout Modal - Higher priority, can appear over admin */
+#calloutModal {
+  z-index: 99999 !important;
+}
+
+/* Confirmation dialogs - Highest priority */
+.confirmation-modal,
+#confirmationModal {
+  z-index: 999999 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   BASE MODAL CONTAINER - Shared styles for all modals
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.modal {
+  background: linear-gradient(145deg, #232640, #1a1a2e);
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  transform: translateZ(0);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MODAL ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes modalFadeIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes modalSlideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.modal-bg.show .modal {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MODAL CLOSE BEHAVIOR
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Click outside to close - prevent event bubbling */
+.modal-bg {
+  cursor: pointer;
+}
+
+.modal {
+  cursor: default;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TESTING MODAL - Special case for site testing banner
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.testing-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.testing-modal.show {
+  display: flex;
+}
+
+.testing-modal-content {
+  background: linear-gradient(145deg, #232640, #1a1a2e);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  max-width: 400px;
+}
+
+.testing-modal-content h2 {
+  color: #ffc107;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.testing-ok-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: background 0.2s ease;
+}
+
+.testing-ok-btn:hover {
+  background: #66bb6a;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MODAL UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Hide scrollbar on modal backgrounds */
+.modal-bg::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-bg {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Focus trap for accessibility */
+.modal[aria-hidden="false"] {
+  display: flex;
+}
+
+.modal[aria-hidden="true"] {
+  display: none;
+}

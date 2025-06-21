@@ -1,0 +1,20 @@
+/* Main CSS File - Imports all modular stylesheets */
+/* Import order is important for cascade and specificity */
+
+@import url("./base.css");          /* Reset, body, html, global styles */
+@import url("./layout.css");        /* Header, flex layouts, grid systems */
+@import url("./components.css");    /* Buttons, dropdowns, general components */
+@import url("./calendar.css");      /* Calendar-specific styles */
+@import url("./header.css");        /* Header and authentication styles */
+@import url("./cdropdown.css");     /* Calendar dropdown rolodex styles */
+@import url("./animations.css");    /* Keyframes, transitions, effects */
+@import url("./responsive.css");    /* Media queries */
+
+/* Split popup.css imports */
+@import url("./modal.css");         /* Core modal system */
+@import url("./forms.css");         /* Enhanced form components */
+@import url("./admin.css");         /* Admin panel components */
+@import url("./notifications.css"); /* Notification system */
+
+/* NEW: Admin Dashboard System */
+@import url("./admin-dashboard.css"); /* Modern admin dashboard */

@@ -1,0 +1,617 @@
+/* COMPLETE MODAL CSS - 60% Screen Size with Full Edit Features */
+/* Replace your existing modal CSS in components.css with this */
+
+/* Modal Background */
+.modal-bg {
+  display: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  will-change: opacity, transform;
+}
+
+.modal-bg.show {
+  display: flex !important;
+}
+
+/* Main Modal Container - 60% Screen Size */
+.modal {
+  background: linear-gradient(145deg, #232640, #1a1a2e);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 60vw;           /* 60% of viewport width */
+  height: 60vh;          /* 60% of viewport height */
+  max-width: 60vw;       /* Override any existing max-width */
+  max-height: 60vh;      /* Override any existing max-height */
+  min-width: 600px;      /* Minimum width for smaller screens */
+  min-height: 400px;     /* Minimum height for content */
+  overflow: hidden;      /* Prevent modal itself from scrolling */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 10000;
+  transform: translateZ(0);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 1rem;
+  flex-shrink: 0;        /* Don't shrink header */
+}
+
+.modal-title, #modalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  flex: 1;
+}
+
+/* Close Button */
+.close-btn, .modal-close {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.close-btn:hover, .modal-close:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+/* Modal Body - Scrollable Content Area */
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;    /* Account for scrollbar */
+  margin-right: -8px;    /* Pull scrollbar to edge */
+}
+
+/* Summary Statistics */
+.summary-stats, .summary-counts {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-width: 100px;
+}
+
+.stat-number, .summary-counts strong {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+}
+
+/* Summary counts styling */
+.summary-counts {
+  margin-bottom: 1rem;
+}
+
+.summary-counts span {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Table Styles - Optimized for 60% Modal */
+.callout-table, .callouts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;    /* Slightly smaller text to fit better */
+  background: transparent;
+}
+
+.callout-table th,
+.callout-table td,
+.callouts-table th,
+.callouts-table td {
+  padding: 0.8rem;      /* Reduced padding for better fit */
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.callout-table th,
+.callouts-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;   /* Smaller header text */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;              /* Sticky header when scrolling */
+  z-index: 10;
+}
+
+.callout-table td,
+.callouts-table td {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
+}
+
+/* Actions column styling */
+.callout-table th.actions-header,
+.callouts-table th.actions-header {
+  text-align: center;
+  width: 120px;
+  min-width: 120px;
+}
+
+/* Table row hover effect */
+.callout-table tr:hover,
+.callouts-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  display: inline-block;
+}
+
+.status-late {
+  background: rgba(255, 255, 0, 0.2);
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+.status-out {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff0000;
+  border: 1px solid #ff0000;
+}
+
+.status-unknown {
+  background: rgba(128, 128, 128, 0.2);
+  color: #cccccc;
+  border: 1px solid #cccccc;
+}
+
+/* Action Buttons */
+.edit-btn, .delete-btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #000;
+}
+
+.edit-btn:hover {
+  background: #ffcd39;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+/* Form Styling for Add/Edit */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background: linear-gradient(145deg, #232640, #1a1a2e);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  min-width: 400px;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.form-container h3 {
+  color: white;
+  margin-top: 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.form-container label {
+  color: white;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-container textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.form-buttons button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #218838;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #545b62;
+}
+
+/* FIXED: Calendar-specific Add Button - Option A Green Border */
+.calendar-day .add-callout-btn {
+  position: absolute;
+  top: 0.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(76, 175, 80, 0.6);
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.2rem 0.4rem;
+  text-align: center;
+  cursor: pointer;
+  z-index: 15;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  min-width: max-content;
+}
+
+.calendar-day .add-callout-btn:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 1);
+  border-color: rgba(76, 175, 80, 0.9);
+  transform: translateX(-50%) translateY(-1px);
+}
+
+.calendar-day .add-callout-btn:active {
+  background: rgba(76, 175, 80, 0.8);
+  color: #ffffff;
+  border-color: rgba(76, 175, 80, 1);
+  transform: translateX(-50%);
+}
+
+/* ADMIN PANEL STYLING */
+
+/* Admin Panel Section Headers */
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.admin-section-title {
+  margin: 0;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Admin Add Callout Button - Different from calendar version */
+.admin-add-callout-btn {
+  position: static;
+  top: auto;
+  right: auto;
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  width: auto;
+  height: auto;
+}
+
+.admin-add-callout-btn:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+/* Admin Control Panel Tables */
+.admin-user-table,
+.admin-callout-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  background: transparent;
+}
+
+.admin-user-table th,
+.admin-user-table td,
+.admin-callout-table th,
+.admin-callout-table td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.admin-user-table th,
+.admin-callout-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-user-table td,
+.admin-callout-table td {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
+}
+
+.admin-user-table tr:hover,
+.admin-callout-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Admin Button Styling */
+.admin-btn {
+  background: #4a3f78;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  margin-left: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.admin-btn:hover {
+  background: #665aa3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Responsive Design for Modal */
+@media (max-width: 1200px) {
+  .modal {
+    width: 70vw;         /* Larger percentage on smaller screens */
+    height: 70vh;
+    max-width: 70vw;
+    max-height: 70vh;
+    min-width: 500px;
+  }
+  
+  .callout-table,
+  .callouts-table {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 85vw;         /* Even larger on mobile */
+    height: 80vh;
+    max-width: 85vw;
+    max-height: 80vh;
+    min-width: 300px;
+    min-height: 350px;
+    padding: 1.5rem;
+  }
+  
+  .callout-table,
+  .callouts-table {
+    font-size: 0.8rem;
+  }
+  
+  .callout-table th,
+  .callout-table td,
+  .callouts-table th,
+  .callouts-table td {
+    padding: 0.6rem;
+  }
+  
+  .summary-stats,
+  .summary-counts {
+    gap: 1rem;
+  }
+  
+  .form-container {
+    min-width: 300px;
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: 95vw;         /* Almost full screen on very small devices */
+    height: 85vh;
+    max-width: 95vw;
+    max-height: 85vh;
+    min-width: unset;
+    padding: 1rem;
+  }
+  
+  .callout-table,
+  .callouts-table {
+    font-size: 0.75rem;
+  }
+  
+  .callout-table th,
+  .callout-table td,
+  .callouts-table th,
+  .callouts-table td {
+    padding: 0.5rem;
+  }
+  
+  .modal-title, #modalTitle {
+    font-size: 1.2rem;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+  
+  .summary-stats,
+  .summary-counts {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Edit/Delete Button Styles */
+.edit-btn,
+.delete-btn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #bd2130;
+}

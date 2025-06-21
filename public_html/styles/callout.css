@@ -1,0 +1,38 @@
+/* Callout-specific styles only */
+
+.db-status-indicator {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  color: white;
+  font-weight: bold;
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.db-status-indicator.connecting {
+  background-color: #ffc107;
+  color: black;
+}
+
+.db-status-indicator.connected {
+  background-color: #28a745;
+}
+
+.db-status-indicator.error {
+  background-color: #dc3545;
+}
+
+.callout-names {
+  background-color: #2e70d1;
+  color: white;
+  font-size: 0.75em;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-top: 4px;
+  word-break: break-word;
+  text-align: center;
+}

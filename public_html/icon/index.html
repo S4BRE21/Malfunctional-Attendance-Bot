@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-content-type-options" content="nosniff">
+  <title>Malfunctional Attendance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-modal.css" />
+</head>
+<body>
+  <!-- Modal for Day Details - NOW ENABLED -->
+  <div class="modal-bg" id="modalBg" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Callouts for Date</h2>
+        <button class="close-btn" id="closeModal" aria-label="Close modal" type="button">&times;</button>
+      </div>
+      
+      <div class="summary-stats" id="summaryStats">
+        <div class="stat-item">
+          <span class="stat-number" id="lateCount">0</span>
+          <span class="stat-label">Late</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="outCount">0</span>
+          <span class="stat-label">Out</span>
+        </div>
+      </div>
+
+      <table class="callouts-table" role="table">
+        <thead>
+          <tr>
+            <th scope="col">Status</th>
+            <th scope="col">User</th>
+            <th scope="col">Delay</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody id="calloutTbody">
+          <!-- Dynamic content will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="testingBanner">TESTING ENVIRONMENT</div>
+
+  <!-- Header Section -->
+  <header id="header">
+    <div class="header-section left">
+      <!-- Login area will be populated by login module -->
+      <div id="loginArea"></div>
+    </div>
+
+    <div class="header-section center">
+      <!-- Logo and title will be populated by logoTitle module -->
+      <div id="logoTitleContainer"></div>
+    </div>
+
+    <div class="header-section right">
+      <!-- Date controls will be populated by dateDropdown module -->
+      <div id="dateDropdownArea"></div>
+    </div>
+  </header>
+
+  <!-- Main Calendar Section -->
+  <main id="calendarWrapper" role="main">
+    <div id="calendarHeader" class="calendar-header" role="columnheader">
+      <!-- Day names will be dynamically inserted here -->
+    </div>
+    <div id="calendar" class="calendar-grid" role="grid" aria-label="Calendar">
+      <!-- Calendar days will be dynamically inserted here -->
+    </div>
+  </main>
+
+  <!-- Loading indicator (hidden by default) -->
+  <div id="loadingIndicator" style="display: none;" aria-live="polite">
+    <div class="loading-content">Loading calendar data...</div>
+  </div>
+
+  <!-- Error message container (hidden by default) -->
+  <div id="errorContainer" style="display: none;" role="alert" aria-live="assertive">
+    <div class="error-content"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module">
+    // Import all modules
+    import { initializeAuth } from './modules/auth.js';
+    import { renderLogoTitle } from './modules/logoTitle.js';
+    import { RenderDateDropdown } from './modules/dateDropdown.js';
+    import { closeSummaryModal } from './modules/summary.js';
+    
+    // Show loading state
+    const showLoading = (show) => {
+      const indicator = document.getElementById('loadingIndicator');
+      if (indicator) {
+        indicator.style.display = show ? 'block' : 'none';
+      }
+    };
+
+    // Show error state
+    const showError = (message) => {
+      const container = document.getElementById('errorContainer');
+      const content = container?.querySelector('.error-content');
+      if (container && content) {
+        content.textContent = message;
+        container.style.display = 'block';
+        setTimeout(() => {
+          container.style.display = 'none';
+        }, 5000);
+      }
+    };
+
+    // Initialize header components
+    try {
+      // Initialize authentication
+      initializeAuth('loginArea');
+      
+      // Render logo and title
+      renderLogoTitle('logoTitleContainer');
+      
+      // Render date dropdown
+      RenderDateDropdown('dateDropdownArea');
+      
+      // Set up modal close handlers
+      const closeModalBtn = document.getElementById('closeModal');
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeSummaryModal);
+      }
+      
+      // ESC key handler for modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeSummaryModal();
+        }
+      });
+      
+      // Click outside modal to close
+      const modalBg = document.getElementById('modalBg');
+      if (modalBg) {
+        modalBg.addEventListener('click', (e) => {
+          if (e.target === modalBg) {
+            closeSummaryModal();
+          }
+        });
+      }
+      
+      console.log('Header components initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize header components:', error);
+      showError('Failed to load header components');
+    }
+  </script>
+
+  <script type="module">
+    // Initialize calendar
+    import { AttendanceCalendar } from './modules/calendar.js';
+    
+    let calendar;
+    
+    const initializeCalendar = async () => {
+      try {
+        const showLoading = (show) => {
+          const indicator = document.getElementById('loadingIndicator');
+          if (indicator) {
+            indicator.style.display = show ? 'block' : 'none';
+          }
+        };
+
+        showLoading(true);
+        calendar = new AttendanceCalendar();
+        
+        // Wait for initialization to complete
+        await calendar.initPromise;
+        
+        // Listen for date changes from the dropdown module
+        const dateDropdownArea = document.getElementById('dateDropdownArea');
+        if (dateDropdownArea) {
+          dateDropdownArea.addEventListener('dateChange', (event) => {
+            const { month, year } = event.detail;
+            calendar.navigateToDate(year, month);
+          });
+        }
+        
+        // Make calendar globally accessible for debugging
+        window.calendar = calendar;
+        
+        showLoading(false);
+        console.log('Calendar initialized successfully');
+        
+        // Update banner to show ready state
+        const banner = document.getElementById('testingBanner');
+        if (banner) {
+          banner.textContent = '✅ CALENDAR READY - Click any day to view attendance details';
+          banner.style.backgroundColor = '#0a7c0a';
+        }
+        
+      } catch (error) {
+        console.error('Failed to initialize calendar:', error);
+        
+        const showError = (message) => {
+          const container = document.getElementById('errorContainer');
+          const content = container?.querySelector('.error-content');
+          if (container && content) {
+            content.textContent = message;
+            container.style.display = 'block';
+          }
+        };
+        
+        showError('Failed to load calendar: ' + error.message);
+        showLoading(false);
+        
+        // Update banner to show error state
+        const banner = document.getElementById('testingBanner');
+        if (banner) {
+          banner.textContent = '⚠ CALENDAR ERROR - ' + error.message;
+          banner.style.backgroundColor = '#a00';
+        }
+      }
+    };
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeCalendar);
+    } else {
+      initializeCalendar();
+    }
+
+    // Add global refresh function for debugging
+    window.refreshCalendar = () => {
+      if (calendar) {
+        calendar.refreshData();
+      } else {
+        console.warn('Calendar not initialized');
+      }
+    };
+  </script>
+
+  <!-- Service Worker Registration (Optional) -->
+  <script>
+    // Register service worker for offline functionality (if available)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(error => {
+            console.log('ServiceWorker registration failed');
+          });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+/* PERFORMANCE-OPTIMIZED Base Styles and Reset */
+
+/* Screen reader only class for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* FIXED: Full viewport layout - NO SCROLLBARS - PERFORMANCE OPTIMIZED */
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* PERFORMANCE: Enable hardware acceleration */
+  transform: translateZ(0);
+}
+
+/* FIXED: Proper full screen body layout with raised header consideration */
+body {
+  margin: 0;
+  padding: 0.5rem; /* FIXED: Reduced padding to maximize calendar space */
+  padding-top: 0.25rem; /* FIXED: Less top padding since header is raised */
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  color: #e0e0e0;
+  font-family: 'Roboto', Arial, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #232640, #1a1a2e);
+  border-radius: 20px;
+  /* SIMPLIFIED SHADOW - Better performance */
+  box-shadow: 
+    0 0 30px 0 rgba(0, 0, 0, 0.4),
+    inset 0 0 15px 0 rgba(255, 255, 255, 0.02);
+  /* FIXED: Use flexbox for proper full screen layout */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* PERFORMANCE: Enable hardware acceleration */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* FIXED: Main container layout for full screen with raised header */
+#header {
+  flex-shrink: 0; /* FIXED: Don't shrink header */
+  z-index: 20;
+  /* FIXED: Account for raised header by reducing margin */
+  margin-bottom: -10px;
+}
+
+#calendarHeader {
+  flex-shrink: 0; /* FIXED: Don't shrink calendar header */
+  z-index: 15;
+}
+
+#calendar {
+  flex: 1; /* FIXED: Take all remaining space for full screen */
+  min-height: 0; /* FIXED: Allow shrinking if needed */
+  overflow: hidden;
+}
+
+/* Testing Environment Banner - PERFORMANCE OPTIMIZED */
+#testingBanner, #serverBanner {
+  background: linear-gradient(135deg, #cc0000, #ff3333);
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
+  letter-spacing: 0.15em;
+  /* SIMPLIFIED SHADOW */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  animation: pulse 3s infinite; /* Slower animation */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  border-radius: 20px 20px 0 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Loading and Error States - PERFORMANCE OPTIMIZED */
+#loadingIndicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  z-index: 1001;
+  /* PERFORMANCE: Hardware acceleration */
+  will-change: transform;
+}
+
+#errorContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 0, 0, 0.9);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  z-index: 1001;
+  max-width: 300px;
+  /* PERFORMANCE: Hardware acceleration */
+  will-change: transform;
+}
+
+/* Utility Classes - PERFORMANCE OPTIMIZED */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(100, 181, 246, 0.3), transparent);
+  animation: loading 2s infinite; /* Slower for better performance */
+}

@@ -1,0 +1,74 @@
+// adminCallouts.js
+console.debug("[adminCallouts] Executing admin modal layout injection...");
+
+const modal = document.getElementById("adminModal");
+if (!modal) {
+  console.error("[adminCallouts] #adminModal not found.");
+} else {
+  modal.innerHTML = `
+    <div class="modal-header flex space-between">
+      <h2 class="modal-title">⚒️ Admin Control Panel - New Role System</h2>
+      <button class="modal-close" onclick="closeAdminModal()">x</button>
+    </div>
+
+    <div class="admin-banner">
+      <div class="legend">
+        <b>🟢 Role System:</b>
+        <ul>
+          <li><span class="badge-admin">ADMIN</span> – Full permissions (backend is_admin = true)</li>
+          <li><span class="badge-raider">RAIDER</span> – Standard user (backend is_admin = false)</li>
+          <li><span class="badge-ff">F&F</span> – Friends & Family (website designation only)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="summary-stats">
+      <div class="stat-box"><span class="count">4</span><label>Officers</label></div>
+      <div class="stat-box"><span class="count">22</span><label>Raiders</label></div>
+      <div class="stat-box"><span class="count">22</span><label>Friends & Family</label></div>
+      <div class="stat-box"><span class="count">0</span><label>Total Callouts</label></div>
+      <div class="stat-box"><span class="count green">0</span><label>This Week</label></div>
+      <div class="stat-box"><span class="count green">0</span><label>Today</label></div>
+    </div>
+
+    <div class="admin-subtabs">
+      <button class="subtab selected" onclick="switchAdminTab('users')">👥 Users</button>
+      <button class="subtab" onclick="switchAdminTab('callouts')">📆 Callouts</button>
+    </div>
+
+    <div id="users-tab" class="admin-tab active">
+      <div class="admin-user-list">
+        <div class="user-row">
+          <img src="/img/clyde.png" class="avatar" />
+          <div class="meta">
+            <div class="username">DarkSparrow</div>
+            <div class="userid">277505848543944448</div>
+          </div>
+          <div class="badge badge-officer">OFFICER</div>
+          <div class="actions">
+            <button>Promote</button>
+            <button>Demote</button>
+            <button>-- F&F</button>
+            <button class="danger">Delete</button>
+          </div>
+        </div>
+        <!-- Add dynamic rows here -->
+      </div>
+    </div>
+
+    <div id="callouts-tab" class="admin-tab hidden">
+      <div class="admin-callout-table">
+        <p>📋 Callout list would appear here...</p>
+      </div>
+    </div>
+  `;
+
+  console.debug("[adminCallouts] Modal updated.");
+
+  window.switchAdminTab = function (tab) {
+    document.querySelectorAll(".admin-tab").forEach(el => el.classList.add("hidden"));
+    document.querySelectorAll(".subtab").forEach(btn => btn.classList.remove("selected"));
+    document.getElementById(`${tab}-tab`).classList.remove("hidden");
+    event.target.classList.add("selected");
+  };
+}

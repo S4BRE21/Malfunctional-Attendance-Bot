@@ -1,0 +1,182 @@
+/* MODAL SYSTEM - Core modal backgrounds, containers, and base functionality */
+
+/* Modal Background */
+.modal-bg {
+  display: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  will-change: opacity, transform;
+}
+.modal-bg.show {
+  display: flex !important;
+}
+#calloutModal { z-index: 99999 !important; }
+#adminModal {
+  z-index: 9999 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+#adminModal > .modal-body,
+#adminModal .modal-body {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #232640, #1a1a2e);
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+  position: relative;
+  z-index: 10000;
+  overflow: hidden;
+  margin: auto;
+}
+
+/* DO NOT force tab-panel or tab-panel > div to display:block/flex! */
+.tab-panel {
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.tab-panel.active {
+  display: block;
+}
+
+/* --- Admin Modal Table Fixes --- */
+#adminModal table,
+#adminModal .admin-user-table,
+#adminModal .admin-callout-table {
+  width: 100% !important;
+  table-layout: fixed;
+  border-collapse: separate;
+}
+
+#adminModal th,
+#adminModal td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+#adminModal thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #212239;
+}
+
+#adminModal tbody {
+  width: 100%;
+  overflow-y: auto;
+  display: table-row-group;
+}
+
+#adminModal .admin-user-table,
+#adminModal .admin-callout-table {
+  margin: 0;
+  border-radius: 12px;
+}
+
+/* Main Modal Container - Default (for others) */
+.modal {
+  background: linear-gradient(145deg, #232640, #1a1a2e);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 60vw;
+  height: 60vh;
+  max-width: 60vw;
+  max-height: 60vh;
+  min-width: 600px;
+  min-height: 400px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 10000;
+  transform: translateZ(0);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+}
+/* Modal header, close, etc. unchanged (see your last modal.css for details) */
+/* ...snip (see your modal.css for more detail—unchanged sections) ... */
+
+/* Responsive: keep the modal always full screen for #adminModal */
+@media (max-width: 1200px) {
+  #adminModal, #adminModal > .modal-body, #adminModal .modal-body {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width: 768px) {
+  #adminModal, #adminModal > .modal-body, #adminModal .modal-body {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width: 480px) {
+  #adminModal, #adminModal > .modal-body, #adminModal .modal-body {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+}
+/* Nuclear option: callout modal always visible if open */
+#calloutModal.modal_bg,
+#calloutModal.modal-bg,
+#calloutModal {
+  z-index: 99999 !important;
+}
+#calloutModal[style*="display: flex"] {
+  z-index: 99999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+#adminModal.modal-bg[style*="display: none"] {
+  display: none !important;
+  z-index: -1 !important;
+}

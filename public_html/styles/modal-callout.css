@@ -1,0 +1,236 @@
+/* CALLOUT MODAL SYSTEM - Enhanced form modal for adding/editing callouts */
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CALLOUT MODAL CONTAINER - 60% Screen Size
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#calloutModal .modal,
+#calloutModal .callout-modal-enhanced {
+  width: 60vw;
+  height: 60vh;
+  max-width: 60vw;
+  max-height: 60vh;
+  min-width: 600px;
+  min-height: 400px;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CALLOUT MODAL HEADER
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#calloutModal .modal-header-enhanced {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#calloutModal .modal-header-enhanced h2,
+#calloutModal #calloutModalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  flex: 1;
+}
+
+#calloutModal .modal-close-enhanced,
+#calloutModal #calloutModalClose {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+#calloutModal .modal-close-enhanced:hover,
+#calloutModal #calloutModalClose:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CALLOUT FORM - Enhanced Layout
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#calloutModal .callout-form-enhanced,
+#calloutModal #calloutForm {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   FORM GROUPS AND INPUTS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#calloutModal .form-group-enhanced {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#calloutModal .form-label-enhanced {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #e0e6ed;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+#calloutModal .input-wrapper-enhanced {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+#calloutModal .form-input-enhanced,
+#calloutModal .form-textarea-enhanced,
+#calloutModal input[type="text"],
+#calloutModal input[type="date"],
+#calloutModal input[type="number"],
+#calloutModal textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#calloutModal .form-input-enhanced:focus,
+#calloutModal .form-textarea-enhanced:focus,
+#calloutModal input:focus,
+#calloutModal textarea:focus {
+  border-color: #64b5f6;
+  background: rgba(100, 181, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.2);
+}
+
+#calloutModal .form-input-enhanced::placeholder,
+#calloutModal .form-textarea-enhanced::placeholder,
+#calloutModal input::placeholder,
+#calloutModal textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#calloutModal .form-textarea-enhanced,
+#calloutModal textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   STATUS BUTTON GROUP
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+#calloutModal .status-button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+#calloutModal .status-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#calloutModal .status-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+#calloutModal .status-btn:hover::before {
+  left: 100%;
+}
+
+#calloutModal .status-btn-late {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+#calloutModal .status-btn-late:hover {
+  background: rgba(255, 193, 7, 0.15);
+  border-color: #ffcd39;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 193, 7, 0.3);
+}
+
+#calloutModal .status-btn-late.active {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: #ffc107;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+}
+
+#calloutModal .status-btn-out {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+#calloutModal .status-btn-out:hover {
+  background: rgba(244, 67, 54, 0.15);
+  border-color: #ff6659;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(244, 67, 54, 0.3);
+}
+
+#calloutModal .status-btn-out.active {
+  background: rgba(244, 67, 54, 0.2);
+  border-color: #f44336;
+  box-shadow: 0 0 20px rgba(244, 67, 54, 0.4);
+}
+
+#calloutModal .status-text {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   DELAY FIELD GROUP - Conditional Display
+   ═══════════════════════════════

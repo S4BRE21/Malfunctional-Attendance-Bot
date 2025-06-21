@@ -1,0 +1,611 @@
+/* Calendar current day glow */
+@keyframes currentDayGlow {
+  0% { 
+    box-shadow: 
+      0 0 15px 4px rgba(100, 181, 246, 0.4),
+      12px 12px 24px rgba(0, 0, 0, 0.8),
+      -12px -12px 24px rgba(80, 80, 120, 0.5);
+  }
+  100% { 
+    box-shadow: 
+      0 0 20px 6px rgba(100, 181, 246, 0.6),
+      12px 12px 24px rgba(0, 0, 0, 0.8),
+      -12px -12px 24px rgba(80, 80, 120, 0.5);
+  }
+}
+
+/* PERFORMANCE-OPTIMIZED Calendar-specific Styles with Clean Split Cell System */
+
+/* FLAT Day Header Cells - No background */
+.header-cell, .calendar-header-day {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  border-radius: 0;   /* Remove border radius for flat look */
+  height: 35px;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  box-shadow: none;   /* Remove all shadows for flat look */
+  position: relative;
+  border: none;       /* Remove border for flat look */
+  text-transform: capitalize;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  opacity: 1.0;
+}
+
+/* FIXED: Calendar Grid - Full height with proper sizing */
+.calendar-grid {
+  height: 100%; /* FIXED: Take full container height for full screen */
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* PERFORMANCE: Use transform3d to enable hardware acceleration */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* FIXED: Dynamic grid rows based on weeks needed for full screen */
+.calendar-grid.weeks-5 {
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.calendar-grid.weeks-6 {
+  grid-template-rows: repeat(6, 1fr);
+}
+
+/* FIXED: Calendar Day Cells - Scale with container for full screen */
+.calendar-day {
+  background: linear-gradient(145deg, #3a4070, #252850);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  border-radius: 15px;
+  /* CRITICAL: Remove expensive transition, only animate transforms */
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  height: 100%; /* FIXED: Take full grid cell height */
+  width: 100%;  /* FIXED: Take full grid cell width */
+  padding: 0.5rem; /* REDUCED: Tighter padding for compact day number */
+  box-sizing: border-box;
+  /* SIMPLIFIED SHADOW - 60% performance improvement */
+  box-shadow:
+    8px 8px 16px rgba(0, 0, 0, 0.6),
+    -8px -8px 16px rgba(70, 70, 100, 0.3);
+  position: relative; /* CRITICAL: For absolute positioned elements */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  /* PERFORMANCE: Use hardware acceleration */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* COMPACT Day Area with Callout Totals */
+.day-number {
+  font-size: 0.9rem; /* Compact but readable */
+  font-weight: 700;
+  margin-bottom: 0.25rem; /* Tight spacing */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 0.25rem; /* Space for underline */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* FULL WIDTH UNDERLINE */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Day Number - LOCKED CENTER - SMALLER */
+.day-number-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Callout Totals in Day Area */
+.callout-total-late {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffc107;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.callout-total-out {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f44336;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* FIXED: Responsive day area sizing for full screen layouts */
+.calendar-grid.weeks-6 .day-number {
+  font-size: 0.8rem; /* Smaller for 6-week layouts */
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.calendar-grid.weeks-6 .day-number-text {
+  font-size: 0.6rem;
+}
+
+.calendar-grid.weeks-6 .callout-total-late,
+.calendar-grid.weeks-6 .callout-total-out {
+  font-size: 0.7rem;
+}
+
+/* NEW: Clean Split Cell System */
+.callout-split-container {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 2.5rem); /* Take remaining space after day number */
+  position: relative;
+  margin-top: 0.25rem;
+}
+
+.callout-split-left,
+.callout-split-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  border-radius: 8px;
+  /* REMOVED: margin gap - cells now touch at center */
+}
+
+.callout-split-left {
+  align-items: flex-start; /* Align children to the left */
+}
+
+.callout-split-right {
+  align-items: flex-end; /* Align children to the right */
+}
+
+/* Left Half - LATE Callouts - COMPLETELY INVISIBLE */
+.callout-split-left {
+  background: transparent;
+  border: none;
+  color: #ffc107;
+}
+
+.callout-split-left:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.callout-split-left.has-callouts {
+  background: transparent;
+  border: none;
+}
+
+/* Right Half - OUT Callouts - COMPLETELY INVISIBLE */
+.callout-split-right {
+  background: transparent;
+  border: none;
+  color: #f44336;
+}
+
+.callout-split-right:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.callout-split-right.has-callouts {
+  background: transparent;
+  border: none;
+}
+
+/* Split Cell Content - REMOVED LABELS */
+
+/* ENHANCED: Past day styling - Greyed out with no overlay needed */
+.calendar-day.past-day {
+  color: #666677;
+  background: linear-gradient(145deg, #2a2a40, #1f1f35);
+  box-shadow:
+    inset 4px 4px 8px rgba(0, 0, 0, 0.4),
+    inset -4px -4px 8px rgba(40, 40, 55, 0.2);
+  border: 1px solid rgba(102, 102, 119, 0.3);
+  cursor: not-allowed;
+}
+
+/* Past day text elements inherit muted colors */
+.calendar-day.past-day .day-number,
+.calendar-day.past-day .day-number-text,
+.calendar-day.past-day .callout-total-late,
+.calendar-day.past-day .callout-total-out {
+  color: #666677;
+  opacity: 0.7;
+}
+
+/* PERFORMANCE: Simplified adjacent month styling */
+.calendar-day.adjacent-month {
+  color: #727a9a;
+  background: linear-gradient(145deg, #1a1f35, #0f1425);
+  box-shadow:
+    8px 8px 16px rgba(0, 0, 0, 0.6),
+    -8px -8px 16px rgba(40, 45, 70, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+/* PERFORMANCE: Only transform on hover - no shadow changes */
+.calendar-day:hover:not(.empty):not(.adjacent-month):not(.past-day) {
+  transform: translateY(-3px) translateZ(0);
+  border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+.calendar-day.past-day:hover {
+  /* No hover effect for past days */
+  transform: none;
+}
+
+.calendar-day.adjacent-month:hover {
+  transform: translateY(-2px) translateZ(0);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* PERFORMANCE: Static current day styling - no infinite animation */
+.calendar-day.current-day {
+  box-shadow:
+    0 0 15px 4px rgba(100, 181, 246, 0.5),
+    8px 8px 16px rgba(0, 0, 0, 0.6),
+    -8px -8px 16px rgba(80, 80, 120, 0.4);
+  border: 2px solid rgba(100, 181, 246, 0.8) !important;
+  background: linear-gradient(145deg, #4a5090, #353870) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* Only animate on hover - MUCH better performance */
+.calendar-day.current-day:hover {
+  animation: currentDayGlow 1s ease-in-out;
+}
+
+.calendar-day.past-day .day-number,
+.calendar-day.adjacent-month .day-number {
+  color: inherit;
+  opacity: 0.8;
+}
+
+.calendar-day {
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   STACKED CALLOUT NAMES SYSTEM with YELLOW NAMES + GREEN DELAYS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Callout name styling - stacked vertically with no backgrounds */
+.callout-name {
+  font-size: 0.65rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 0.1rem;
+  padding: 0.02rem 0.05rem;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  background: transparent;
+  border: none;
+}
+
+.callout-name:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.callout-name:active {
+  transform: translateY(0);
+}
+
+/* Color coding for callout types with delay styling */
+.callout-name.late {
+  color: #ffc107;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.callout-name.late .delay-text {
+  color: #4caf50; /* Green for delay */
+  margin-left: 0.3rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.callout-name.out {
+  color: #f44336;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Text alignment for left and right sides */
+.callout-split-left .callout-name {
+  text-align: left;
+}
+
+.callout-split-right .callout-name {
+  text-align: right;
+}
+
+/* Responsive font sizes based on callout count in each half */
+.callout-split-left.many-callouts .callout-name,
+.callout-split-right.many-callouts .callout-name {
+  font-size: 0.55rem;
+  margin-bottom: 0.08rem;
+  line-height: 1.0;
+}
+
+.callout-split-left.very-many-callouts .callout-name,
+.callout-split-right.very-many-callouts .callout-name {
+  font-size: 0.5rem;
+  margin-bottom: 0.06rem;
+  line-height: 0.9;
+}
+
+/* Extra dense packing for extreme cases (7+ callouts) */
+.callout-split-left.extremely-many-callouts .callout-name,
+.callout-split-right.extremely-many-callouts .callout-name {
+  font-size: 0.45rem;
+  margin-bottom: 0.04rem;
+  line-height: 0.85;
+  padding: 0.01rem 0.02rem;
+}
+
+/* Responsive Design Adjustments for Split Cell System */
+
+/* FIXED: Better responsive sizing for full screen */
+@media (max-width: 768px) {
+  .calendar-day {
+    padding: 0.4rem;
+    border-radius: 10px;
+  }
+
+  .day-number {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .day-number-text {
+    font-size: 0.6rem;
+  }
+
+  .callout-total-late,
+  .callout-total-out {
+    font-size: 0.7rem;
+  }
+
+  .calendar-grid.weeks-6 .day-number {
+    font-size: 0.7rem;
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.15rem;
+  }
+
+  .callout-split-container {
+    height: calc(100% - 2rem);
+  }
+
+  .callout-split-left,
+  .callout-split-right {
+    font-size: 0.7rem;
+    padding: 0.2rem;
+  }
+
+  /* Callout names responsive - tablet */
+  .callout-name {
+    font-size: 0.55rem;
+  }
+  
+  .callout-split-left.many-callouts .callout-name,
+  .callout-split-right.many-callouts .callout-name {
+    font-size: 0.48rem;
+  }
+  
+  .callout-split-left.very-many-callouts .callout-name,
+  .callout-split-right.very-many-callouts .callout-name {
+    font-size: 0.42rem;
+  }
+  
+  .callout-split-left.extremely-many-callouts .callout-name,
+  .callout-split-right.extremely-many-callouts .callout-name {
+    font-size: 0.38rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-day {
+    padding: 0.3rem;
+    border-radius: 8px;
+  }
+
+  .day-number {
+    font-size: 0.7rem;
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.15rem;
+  }
+
+  .day-number-text {
+    font-size: 0.55rem;
+  }
+
+  .callout-total-late,
+  .callout-total-out {
+    font-size: 0.6rem;
+  }
+
+  .calendar-grid.weeks-6 .day-number {
+    font-size: 0.65rem;
+    margin-bottom: 0.1rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .callout-split-container {
+    height: calc(100% - 1.8rem);
+  }
+
+  .callout-split-left,
+  .callout-split-right {
+    font-size: 0.65rem;
+    padding: 0.15rem;
+  }
+
+  /* Callout names responsive - mobile */
+  .callout-name {
+    font-size: 0.5rem;
+  }
+  
+  .callout-split-left.many-callouts .callout-name,
+  .callout-split-right.many-callouts .callout-name {
+    font-size: 0.42rem;
+  }
+  
+  .callout-split-left.very-many-callouts .callout-name,
+  .callout-split-right.very-many-callouts .callout-name {
+    font-size: 0.38rem;
+  }
+  
+  .callout-split-left.extremely-many-callouts .callout-name,
+  .callout-split-right.extremely-many-callouts .callout-name {
+    font-size: 0.35rem;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+  .calendar-day {
+    padding: 0.6rem;
+  }
+  
+  .day-number {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .day-number-text {
+    font-size: 0.8rem;
+  }
+
+  .callout-total-late,
+  .callout-total-out {
+    font-size: 0.9rem;
+  }
+
+  .callout-split-container {
+    height: calc(100% - 3rem);
+  }
+
+  .callout-split-left,
+  .callout-split-right {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+
+  /* Callout names responsive - large screens */
+  .callout-name {
+    font-size: 0.7rem;
+  }
+  
+  .callout-split-left.many-callouts .callout-name,
+  .callout-split-right.many-callouts .callout-name {
+    font-size: 0.6rem;
+  }
+  
+  .callout-split-left.very-many-callouts .callout-name,
+  .callout-split-right.very-many-callouts .callout-name {
+    font-size: 0.55rem;
+  }
+  
+  .callout-split-left.extremely-many-callouts .callout-name,
+  .callout-split-right.extremely-many-callouts .callout-name {
+    font-size: 0.5rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .calendar-day {
+    padding: 0.75rem;
+  }
+  
+  .day-number {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .day-number-text {
+    font-size: 0.9rem;
+  }
+
+  .callout-total-late,
+  .callout-total-out {
+    font-size: 1rem;
+  }
+
+  .callout-split-container {
+    height: calc(100% - 3.5rem);
+  }
+
+  .callout-split-left,
+  .callout-split-right {
+    font-size: 1rem;
+    padding: 0.4rem;
+  }
+
+  /* Callout names responsive - extra large screens */
+  .callout-name {
+    font-size: 0.75rem;
+  }
+  
+  .callout-split-left.many-callouts .callout-name,
+  .callout-split-right.many-callouts .callout-name {
+    font-size: 0.65rem;
+  }
+  
+  .callout-split-left.very-many-callouts .callout-name,
+  .callout-split-right.very-many-callouts .callout-name {
+    font-size: 0.6rem;
+  }
+  
+  .callout-split-left.extremely-many-callouts .callout-name,
+  .callout-split-right.extremely-many-callouts .callout-name {
+    font-size: 0.55rem;
+  }
+}

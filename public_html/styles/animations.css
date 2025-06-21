@@ -1,0 +1,118 @@
+/* PERFORMANCE-OPTIMIZED Animations and Effects - NO FEL FIRE */
+
+/* Keyframe Animations - REDUCED COMPLEXITY */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Calendar current day glow */
+@keyframes currentDayGlow {
+  0% { 
+    box-shadow: 
+      0 0 15px 4px rgba(100, 181, 246, 0.4),
+      12px 12px 24px rgba(0, 0, 0, 0.8),
+      -12px -12px 24px rgba(80, 80, 120, 0.5);
+  }
+  100% { 
+    box-shadow: 
+      0 0 20px 6px rgba(100, 181, 246, 0.6),
+      12px 12px 24px rgba(0, 0, 0, 0.8),
+      -12px -12px 24px rgba(80, 80, 120, 0.5);
+  }
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(20px); opacity: 0; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Slide animations for notifications - MOVED FROM popup.css */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+/* Modal animations - MOVED FROM popup.css */
+@keyframes modalSlideIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Animation Classes - PERFORMANCE OPTIMIZED */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.slide-out {
+  animation: slideOut 0.3s ease-in;
+}
+
+/* Reduce animation complexity for loading states */
+.loading::after {
+  animation: loading 2s infinite; /* Slower = less CPU */
+}
