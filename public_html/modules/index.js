@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // STEP 5: Pre-initialize admin dashboard for faster loading
     console.log('[index] Step 5: Pre-initializing admin dashboard...');
     try {
-      const { AdminDashboard } = await import('./adminDashboard.js');
+      const { AdminDashboard } = await import('./AdminDashboard.js');
       window.adminDashboard = new AdminDashboard();
       await window.adminDashboard.initPromise;
       console.log('[index] Admin dashboard pre-initialized');

@@ -7,6 +7,11 @@ import passport from 'passport';
 import { Strategy as DiscordStrategy } from 'passport-discord';
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
+console.log(
+  '🔑 Discord creds ➞',
+  process.env.DISCORD_CLIENT_ID,
+  process.env.DISCORD_CLIENT_SECRET
+);
 import path from 'path';
 import { fileURLToPath } from 'url';
 

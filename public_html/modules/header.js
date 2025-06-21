@@ -133,7 +133,7 @@ export class HeaderManager {
         try {
           // Import and initialize admin dashboard if not already done
           if (!window.adminDashboard) {
-            const { AdminDashboard } = await import('./adminDashboard.js');
+            const { AdminDashboard } = await import('./AdminDashboard.js');
             window.adminDashboard = new AdminDashboard();
             await window.adminDashboard.initPromise;
             console.log('[header] Admin dashboard initialized');
