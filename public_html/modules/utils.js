@@ -1,14 +1,30 @@
 // public_html/modules/utils.js
-import * as asyncUtils from './utils/async.js';
-import * as dateFormat from './utils/dateFormat.js';
-import * as stringUtils from './utils/string.js';
-import * as storageUtils from './utils/storage.js';
-import * as timezoneUtils from './utils/timezone.js';
+// ───────────────────────────────────────────────────────────────────────────────
+// Barrel file re‐exporting all split‐out utility modules.
+// Consumers still import from './utils.js'
+// ───────────────────────────────────────────────────────────────────────────────
+
+export { debounce, sleep }
+  from './utils/async.js';
 
 export {
-  ...asyncUtils,
-  ...dateFormat,
-  ...stringUtils,
-  ...storageUtils,
-  ...timezoneUtils
-};
+  formatDateForUser,
+  formatTimeForUser
+}
+  from './utils/dateFormat.js';
+
+export { truncate, escapeHtml, sanitizeInput }
+  from './utils/string.js';
+
+export { getFriendsFamilyUsers, setFriendsFamilyUsers }
+  from './utils/storage.js';
+
+export {
+  getServerTimezone,
+  getUserTimezone,
+  getTimezoneAbbreviation,
+  convertToServerTime,
+  convertFromServerTime,
+  convertUserTodayToServerDate
+}
+  from './utils/timezone.js';
