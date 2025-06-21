@@ -1,0 +1,34 @@
+# Ignore everything by default
+/*
+
+# Unignore these folders and files
+!/public_html/
+!/passthrough/
+!push.sh
+!.gitignore
+
+# Ignore sensitive files
+passthrough/.env
+
+# Ignore development and system clutter
+node_modules/
+venv/
+.env
+*.log
+*.zip
+tmp/
+logs/
+.cache/
+.pm2/
+.ssh/
+.npm/
+Maildir/
+TRASH/
+awstats/
+bin/
+bot_env/
+cgi-bin/
+fcgi-bin/
+cleanrepo.git/
+cleanrepo/
+etc/
